@@ -3,29 +3,30 @@
 <title>Business Radar · PESTEL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#FFF8EC;--ink:#3A3354;--ink2:#4F4870;--accent:#7B58C4;--card:#FFFDF8;--line:#E6DACB}
+:root{--cream:#FFFDF5;--ink:#0A2463;--ink2:#26395F;--accent:#0038A8;--red:#CE1126;--yellow:#FCD116;--card:#FFFFFF;--line:#C9D4EE}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--ink2);font-family:'Nunito','Trebuchet MS',Arial,sans-serif;min-height:100vh}
 h1,h2,h3{font-family:'Fredoka','Trebuchet MS',Arial,sans-serif;color:var(--ink);margin:0}
-.banig{height:14px;background:repeating-linear-gradient(90deg,#DCD0F5 0 28px,#FFE8A3 28px 56px,#FBCBD8 56px 84px,#C4E4F8 84px 112px,#C4ECD7 112px 140px,#FFD4B8 140px 168px)}
+.banig{height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14'%3E%3Crect width='42' height='14' fill='%230038A8'/%3E%3Cpolygon points='7%2C0 14%2C7 7%2C14 0%2C7' fill='%23FCD116'/%3E%3Cpolygon points='7%2C3.5 10.5%2C7 7%2C10.5 3.5%2C7' fill='%23fff'/%3E%3Cpolygon points='28%2C0 35%2C7 28%2C14 21%2C7' fill='%23CE1126'/%3E%3Cpolygon points='28%2C3.5 31.5%2C7 28%2C10.5 24.5%2C7' fill='%23fff'/%3E%3C/svg%3E") repeat-x}
+body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14'%3E%3Crect width='42' height='14' fill='%230038A8'/%3E%3Cpolygon points='7%2C0 14%2C7 7%2C14 0%2C7' fill='%23FCD116'/%3E%3Cpolygon points='7%2C3.5 10.5%2C7 7%2C10.5 3.5%2C7' fill='%23fff'/%3E%3Cpolygon points='28%2C0 35%2C7 28%2C14 21%2C7' fill='%23CE1126'/%3E%3Cpolygon points='28%2C3.5 31.5%2C7 28%2C10.5 24.5%2C7' fill='%23fff'/%3E%3C/svg%3E") repeat-x;background-size:30px 10px;pointer-events:none}
 .wrap{max-width:780px;margin:0 auto;padding:18px}
 .card{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:18px 20px}
 .btn{font:inherit;font-weight:800;font-size:18px;border:3px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;padding:14px 18px;cursor:pointer}
-.btn.primary{background:#7B58C4;border-color:#7B58C4;color:#fff}
+.btn.primary{background:#0038A8;border-color:#0A2463;color:#fff}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-size:13px}
+.eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-size:13px}
 .grid6{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .fbtn{border:4px solid;border-radius:22px;padding:14px 8px;text-align:center;cursor:pointer;font:inherit;color:var(--ink)}
 .fbtn .l{font-family:'Fredoka',Arial,sans-serif;font-size:44px;font-weight:600;line-height:1}
 .fbtn .n{font-weight:800;font-size:15px;margin-top:4px}
-.fbtn.sel{outline:6px solid #3A3354;outline-offset:2px}
+.fbtn.sel{outline:6px solid #FCD116;outline-offset:2px;box-shadow:0 0 0 9px #0A2463}
 .fbtn:disabled{opacity:.5}
 .ot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.ot .btn.sel{background:#3A3354;color:#fff;border-color:#3A3354}
+.ot .btn.sel{background:#0A2463;color:#fff;border-color:#0A2463}
 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .teams .btn{font-size:26px;padding:26px}
 .muted{color:#6B6485}
-.ok{color:#2F7D52;font-weight:800}.no{color:#B5483A;font-weight:800}
+.ok{color:#0038A8;font-weight:800}.no{color:#CE1126;font-weight:800}
 .big{font-size:22px;line-height:1.4}
 .pill{display:inline-block;border-radius:999px;padding:4px 14px;font-weight:800;border:3px solid var(--line);background:#fff}
 /* host / TV */
@@ -34,10 +35,10 @@ h1,h2,h3{font-family:'Fredoka','Trebuchet MS',Arial,sans-serif;color:var(--ink);
 .tv h1{font-size:44px}
 .layout{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;margin-top:20px}
 .scen{font-size:34px;line-height:1.35;color:var(--ink)}
-.timer{font-family:'Fredoka',Arial,sans-serif;font-size:96px;color:var(--accent);line-height:1}
+.timer{font-family:'Fredoka',Arial,sans-serif;font-size:96px;color:var(--red);line-height:1}
 .chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
 .chip{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 16px;font-weight:800;font-size:20px}
-.chip.in{background:#C4ECD7;border-color:#8FD1AE}
+.chip.in{background:#FFF4B8;border-color:#FCD116}
 .score{width:100%;border-collapse:collapse;font-size:26px}
 .score td,.score th{padding:10px 8px;border-bottom:2px solid var(--line);text-align:left}
 .score td.r,.score th.r{text-align:right}
@@ -51,6 +52,67 @@ h1,h2,h3{font-family:'Fredoka','Trebuchet MS',Arial,sans-serif;color:var(--ink);
 
 @media(min-width:700px){.grid6{grid-template-columns:repeat(3,1fr)}.fbtn .l{font-size:56px}.scen2{font-size:28px}}
 
+
+/* ---- fit-to-screen: no scrolling ---- */
+html,body{height:100%;overflow:hidden}
+body{min-height:0}
+#app{height:calc(100vh - 24px);height:calc(100dvh - 24px);overflow:hidden}
+.tv{padding:1.6vh 2.2vw;display:flex;flex-direction:column}
+.tv .top{flex:none}
+.tv h1{font-size:clamp(22px,4.4vh,44px)}
+.tv .eyebrow{font-size:clamp(11px,1.8vh,15px)}
+.layout{flex:1;min-height:0;display:grid;grid-template-columns:1.75fr 1fr;gap:2vw;margin-top:1.2vh}
+.layout>div{min-height:0}
+.layout>div:first-child{display:flex;flex-direction:column;gap:1.2vh}
+.tv .card{padding:1.4vh 1.3vw;border-radius:2.4vh}
+.tv .card h2{font-size:clamp(20px,4.6vh,46px);line-height:1.1}
+.tv .card h3{font-size:clamp(16px,3vh,28px)}
+.scen{font-size:clamp(18px,3.6vh,36px);line-height:1.3;margin:.4vh 0 0}
+.tv .card .scen[style]{font-size:clamp(15px,2.8vh,28px)!important}
+.timer{font-size:clamp(40px,10vh,96px)}
+.chips{gap:1vh 1vw;margin-top:0}
+.chip{padding:.8vh 1vw;font-size:clamp(13px,2.4vh,20px);border-radius:2vh}
+.chips.rev{display:grid;grid-template-columns:repeat(4,1fr)}
+.chips.rev .chip{padding:.8vh .7vw}
+.tag{min-width:clamp(26px,4.4vh,44px);height:clamp(26px,4.4vh,44px);font-size:clamp(15px,2.8vh,26px);border-radius:1.4vh}
+.ans{font-size:clamp(13px,2.4vh,22px);gap:.5vw;flex-wrap:wrap}
+.awardrow{font-size:clamp(12px,2.1vh,18px);margin-top:.4vh;flex-wrap:wrap;gap:.4vw}
+.awardrow .btn{font-size:clamp(11px,1.9vh,16px);padding:.5vh .6vw;border-radius:1.2vh;border-width:2px}
+.news{margin-top:0;font-size:clamp(13px,2.5vh,24px);line-height:1.3}
+.news .sm{font-size:clamp(11px,1.8vh,16px)}
+.ctrl{margin-top:0;gap:1vw}
+.ctrl .btn{font-size:clamp(14px,2.6vh,22px);padding:1.2vh 1.6vw;border-radius:2vh}
+.score{font-size:clamp(16px,3.4vh,28px)}
+.score td,.score th{padding:1.2vh .5vw}
+.layout>div:last-child{overflow:hidden}
+/* team tablet */
+.wrap{max-width:900px;height:calc(100vh - 24px);height:calc(100dvh - 24px);display:flex;flex-direction:column;padding:1.2vh 16px;overflow:hidden}
+.wrap h1{font-size:clamp(24px,5vh,40px)}
+.wrap h2{font-size:clamp(20px,4vh,32px)}
+.wrap .card{padding:1.2vh 14px;border-radius:2vh}
+.wrap .big{font-size:clamp(15px,2.7vh,22px);line-height:1.3}
+.wrap .pill{padding:.4vh 12px;font-size:clamp(13px,2.2vh,18px)}
+.wrap .muted{font-size:clamp(12px,2.1vh,16px)}
+.wrap .eyebrow{font-size:clamp(11px,1.8vh,13px)}
+.grid6{flex:1 1 0;min-height:0;grid-auto-rows:1fr;gap:1.2vh 10px;margin-top:.8vh}
+.fbtn{padding:.4vh 4px;display:flex;flex-direction:column;justify-content:center;border-radius:2vh;min-height:0}
+.fbtn .l{font-size:clamp(26px,6vh,56px)}
+.fbtn .n{font-size:clamp(12px,2.2vh,16px);margin-top:.2vh}
+.ot{margin-top:.8vh;gap:10px;flex:none}
+.ot .btn,#send{font-size:clamp(15px,2.8vh,20px);padding:1.2vh 10px}
+#send{margin-top:.8vh!important;flex:none}
+.teams .btn{padding:3vh 10px}
+@media(max-width:600px){.grid6{grid-template-columns:repeat(2,1fr)}}
+.brand{display:flex;align-items:center;gap:1.2vw}
+.brand h1{line-height:1}
+.sunic{display:block;width:clamp(34px,7vh,64px);height:clamp(34px,7vh,64px);flex:none}
+.parolic{position:absolute;right:2.2vw;top:1.2vh;width:clamp(26px,6.4vh,56px);height:clamp(40px,9.6vh,84px);pointer-events:none}
+.tv{position:relative}
+.landing-art{display:flex;align-items:center;gap:16px;margin-top:1.2vh}
+.landing-art .p{width:clamp(60px,14vh,120px);height:clamp(90px,21vh,180px);flex:none}
+.sampa{height:clamp(24px,5vh,40px);margin-top:1vh}
+.pill{background:#FFF4B8;border-color:#FCD116}
+.score tr.lead td{background:#FFF4B8}
 </style></head><body>
 <div class="banig"></div>
 <div id="app"></div>
@@ -69,12 +131,12 @@ window.RADAR = {
 <script>
 // Six Factor Hunt rounds. Edit scenario/news text freely. ok = accepted Opportunity/Threat answers.
 window.FACTORS = [
-  {id:"P",  letter:"P", name:"Political",     fil:"Pulitikal",       color:"#DCD0F5", line:"#B8A3E8"},
-  {id:"Ec", letter:"E", name:"Economic",      fil:"Ekonomiko",       color:"#FFE8A3", line:"#EBC85A"},
-  {id:"S",  letter:"S", name:"Social",        fil:"Sosyal",          color:"#FBCBD8", line:"#EE9DB5"},
-  {id:"T",  letter:"T", name:"Technological", fil:"Teknolohikal",    color:"#C4E4F8", line:"#8CC3E8"},
-  {id:"En", letter:"E", name:"Environmental", fil:"Pangkapaligiran", color:"#C4ECD7", line:"#8FD1AE"},
-  {id:"L",  letter:"L", name:"Legal",         fil:"Ligal",           color:"#FFD4B8", line:"#EFA67A"}
+  {id:"P",  letter:"P", name:"Political",     fil:"Pulitikal",       color:"#0038A8", line:"#0A2463", text:"#FFFFFF", tint:"#DCE6FA"},
+  {id:"Ec", letter:"E", name:"Economic",      fil:"Ekonomiko",       color:"#FCD116", line:"#C9A400", text:"#0A2463", tint:"#FFF4B8"},
+  {id:"S",  letter:"S", name:"Social",        fil:"Sosyal",          color:"#CE1126", line:"#8E0C1A", text:"#FFFFFF", tint:"#FADADD"},
+  {id:"T",  letter:"T", name:"Technological", fil:"Teknolohikal",    color:"#8FB0F0", line:"#0038A8", text:"#0A2463", tint:"#E6EEFC"},
+  {id:"En", letter:"E", name:"Environmental", fil:"Pangkapaligiran", color:"#FFFFFF", line:"#0038A8", text:"#0038A8", tint:"#F2F5FC"},
+  {id:"L",  letter:"L", name:"Legal",         fil:"Ligal",           color:"#F4A3AB", line:"#CE1126", text:"#0A2463", tint:"#FDE8EA"}
 ];
 window.ROUNDS = [
   {f:"P", ok:["O"], scenario:"The local government offers a one-year tax break and free stalls for small food businesses in the barangay.",
@@ -143,13 +205,16 @@ window.ROUNDS = [
 </script>
 <script>
 const $ = s => document.querySelector(s);
+const SUN='<svg viewBox="0 0 100 100" width="100%" height="100%" aria-label="Sun of the Philippine flag"><g fill="#FCD116" stroke="#C9A400" stroke-width="1.5" stroke-linejoin="round"><polygon points="50,2 57,24 43,24" transform="rotate(0 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(45 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(90 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(135 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(180 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(225 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(270 50 50)"/><polygon points="50,2 57,24 43,24" transform="rotate(315 50 50)"/><circle cx="50" cy="50" r="22"/></g></svg>', PAROL='<svg viewBox="0 0 200 300" width="100%" height="100%" aria-label="Parol, a Filipino star lantern"><line x1="100" y1="0" x2="100" y2="22" stroke="#0038A8" stroke-width="3"/><polygon points="100.0,24.0 116.8,71.3 162.2,49.8 140.7,95.2 188.0,112.0 140.7,128.8 162.2,174.2 116.8,152.7 100.0,200.0 83.2,152.7 37.8,174.2 59.3,128.8 12.0,112.0 59.3,95.2 37.8,49.8 83.2,71.3" fill="#FCD116" stroke="#C9A400" stroke-width="3" stroke-linejoin="round"/><polygon points="123.7,54.7 122.6,89.4 157.3,88.3 132.0,112.0 157.3,135.7 122.6,134.6 123.7,169.3 100.0,144.0 76.3,169.3 77.4,134.6 42.7,135.7 68.0,112.0 42.7,88.3 77.4,89.4 76.3,54.7 100.0,80.0" fill="#CE1126" stroke="#8E0C1A" stroke-width="2.5" stroke-linejoin="round"/><polygon points="100.0,74.0 107.7,93.5 126.9,85.1 118.5,104.3 138.0,112.0 118.5,119.7 126.9,138.9 107.7,130.5 100.0,150.0 92.3,130.5 73.1,138.9 81.5,119.7 62.0,112.0 81.5,104.3 73.1,85.1 92.3,93.5" fill="#fff" stroke="#0038A8" stroke-width="2.5" stroke-linejoin="round"/><circle cx="100" cy="112" r="13" fill="#0038A8"/><polygon points="55,200 73,200 28,290" fill="#0038A8" stroke="#0A2463" stroke-width="2" stroke-linejoin="round"/><polygon points="73,200 91,200 64,290" fill="#CE1126" stroke="#8E0C1A" stroke-width="2" stroke-linejoin="round"/><polygon points="91,200 109,200 100,290" fill="#FCD116" stroke="#C9A400" stroke-width="2" stroke-linejoin="round"/><polygon points="109,200 127,200 136,290" fill="#CE1126" stroke="#8E0C1A" stroke-width="2" stroke-linejoin="round"/><polygon points="127,200 145,200 172,290" fill="#0038A8" stroke="#0A2463" stroke-width="2" stroke-linejoin="round"/></svg>', SAMP='<svg viewBox="0 0 240 36" width="100%" height="100%" aria-label="Sampaguita flowers"><path d="M0,18 Q60,6 120,18 T240,18" fill="none" stroke="#7BAA5E" stroke-width="2"/><ellipse cx="24" cy="8" rx="6" ry="11" transform="rotate(0 24 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="24" cy="8" rx="6" ry="11" transform="rotate(72 24 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="24" cy="8" rx="6" ry="11" transform="rotate(144 24 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="24" cy="8" rx="6" ry="11" transform="rotate(216 24 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="24" cy="8" rx="6" ry="11" transform="rotate(288 24 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><circle cx="24" cy="18" r="3.5" fill="#FCD116"/><ellipse cx="72" cy="8" rx="6" ry="11" transform="rotate(0 72 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="72" cy="8" rx="6" ry="11" transform="rotate(72 72 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="72" cy="8" rx="6" ry="11" transform="rotate(144 72 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="72" cy="8" rx="6" ry="11" transform="rotate(216 72 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="72" cy="8" rx="6" ry="11" transform="rotate(288 72 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><circle cx="72" cy="18" r="3.5" fill="#FCD116"/><ellipse cx="120" cy="8" rx="6" ry="11" transform="rotate(0 120 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="120" cy="8" rx="6" ry="11" transform="rotate(72 120 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="120" cy="8" rx="6" ry="11" transform="rotate(144 120 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="120" cy="8" rx="6" ry="11" transform="rotate(216 120 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="120" cy="8" rx="6" ry="11" transform="rotate(288 120 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><circle cx="120" cy="18" r="3.5" fill="#FCD116"/><ellipse cx="168" cy="8" rx="6" ry="11" transform="rotate(0 168 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="168" cy="8" rx="6" ry="11" transform="rotate(72 168 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="168" cy="8" rx="6" ry="11" transform="rotate(144 168 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="168" cy="8" rx="6" ry="11" transform="rotate(216 168 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="168" cy="8" rx="6" ry="11" transform="rotate(288 168 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><circle cx="168" cy="18" r="3.5" fill="#FCD116"/><ellipse cx="216" cy="8" rx="6" ry="11" transform="rotate(0 216 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="216" cy="8" rx="6" ry="11" transform="rotate(72 216 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="216" cy="8" rx="6" ry="11" transform="rotate(144 216 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="216" cy="8" rx="6" ry="11" transform="rotate(216 216 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><ellipse cx="216" cy="8" rx="6" ry="11" transform="rotate(288 216 18)" fill="#fff" stroke="#C9C2A0" stroke-width="1"/><circle cx="216" cy="18" r="3.5" fill="#FCD116"/></svg>';
+const brand=(sub)=>'<div class="brand"><span class="sunic">'+SUN+'</span><div><p class="eyebrow">'+sub+'</p><h1>Business Radar</h1></div></div>';
 function runLanding(){
   $('#app').className='wrap';
   const base=location.href.split('#')[0];
-  $('#app').innerHTML='<p class="eyebrow">Applied Economics 12 · ABM</p><h1>Business Radar</h1><p class="big">PESTEL Factor Hunt. One tablet per team: the Recorder answers for the team.</p>'
-   +'<div class="card" style="margin-top:14px"><h3>Team tablet</h3><p>Choose your team and answer each round.</p><a href="#team" onclick="setTimeout(()=>location.reload(),50)"><button class="btn primary">Join as team</button></a></div>'
-   +'<div class="card" style="margin-top:14px"><h3>Teacher (TV screen)</h3><p>Open on the laptop connected to the TV.</p><a href="#host" onclick="setTimeout(()=>location.reload(),50)"><button class="btn">Open host screen</button></a></div>'
-   +'<p class="muted sm" style="margin-top:14px">Tablets: '+base+'#team<br>Teacher: '+base+'#host</p>';
+  $('#app').innerHTML=brand('Applied Economics 12 · ABM')
+   +'<div class="landing-art"><div class="p">'+PAROL+'</div><div><h2>Mabuhay!</h2><p class="big">PESTEL Factor Hunt. One tablet per team: the Recorder answers for the team.</p></div></div><div class="sampa">'+SAMP+'</div>'
+   +'<div class="card" style="margin-top:1vh"><h3>Team tablet</h3><a href="#team" onclick="setTimeout(()=>location.reload(),50)"><button class="btn primary">Join as team</button></a></div>'
+   +'<div class="card" style="margin-top:1vh"><h3>Teacher (TV screen)</h3><a href="#host" onclick="setTimeout(()=>location.reload(),50)"><button class="btn">Open host screen</button></a></div>'
+   +'<p class="muted sm" style="margin-top:1vh">Tablets: '+base+'#team<br>Teacher: '+base+'#host</p>';
 }
 function runHost(){
 $('#app').className='tv';
@@ -177,28 +242,28 @@ function finish(){ S.phase="final"; save(); }
 function resetAll(){ if(confirm("Reset all scores and answers?")){ S=Store.blank(); A={}; save({}); } }
 function render(){
   if(!S) return;
-  const r=S.round, rd=ROUNDS[r-1], ph=S.phase;
-  let h='<div class="top"><div><p class="eyebrow">Applied Economics 12 · PESTEL</p><h1>Business Radar'+(r?(' · Round '+r+' of '+ROUNDS.length):'')+'</h1></div><div class="muted sm">'+(Store.remote?'Online mode':'Test mode (one computer)')+' · <a href="#team" target="_blank">team page</a></div></div>';
+  const r=S.round, rd=ROUNDS[r-1], ph=S.phase; let newsH='';
+  let h='<div class="top">'+brand('Applied Economics 12 · PESTEL'+(r?' · Round '+r+' of '+ROUNDS.length:''))+'<span class="parolic">'+PAROL+'</span><div class="muted sm" style="margin-right:6vw">'+(Store.remote?'Online mode':'Test mode (one computer)')+' · <a href="#team" target="_blank">team page</a></div></div>';
   h+='<div class="layout"><div>';
   if(ph==="lobby"){
-    h+='<div class="card"><h2>Ready to play</h2><p class="scen">Teams: open the team link (index.html#team) on your tablet and choose your team.</p><div class="ctrl"><button class="btn primary" onclick="startRound(1)">Start Round 1</button></div></div>';
+    h+='<div class="card"><h2>Handa na? Ready to play</h2><p class="scen">Teams: open the team link (index.html#team) on your tablet and choose your team.</p><div class="ctrl"><button class="btn primary" onclick="startRound(1)">Start Round 1</button></div></div>';
   } else if(ph==="final"){
     const rows=Object.entries(S.scores).sort((a,b)=>b[1]-a[1]);
-    h+='<div class="card"><h2>Final scores</h2><p class="scen">'+rows.map(([t,s],i)=>(i+1)+'. Team '+t+' · <b>'+s+' XP</b>').join('<br>')+'</p><p class="muted">Add the Boss Round and Lightning Round points on the board.</p></div>';
+    h+='<div class="card"><h2>Mabuhay! Final scores</h2><p class="scen">'+rows.map(([t,s],i)=>(i+1)+'. Team '+t+' · <b>'+s+' XP</b>').join('<br>')+'</p><p class="muted">Add the Boss Round and Lightning Round points on the board.</p></div>';
   } else {
     const f=fac(rd.f);
     if(ph==="revealed"){
-      h+='<div class="card" style="background:'+f.color+';border-color:'+f.line+'"><p class="eyebrow">Answer</p><h2 style="font-size:48px">'+f.letter+' · '+f.name+' ('+f.fil+') · '+rd.ok.map(otName).join(" or ")+'</h2><p class="scen" style="font-size:28px">'+rd.why+'</p></div>';
+      h+='<div class="card" style="background:'+f.tint+';border-color:'+f.line+'"><p class="eyebrow">Answer</p><h2 style="font-size:48px">'+f.letter+' · '+f.name+' ('+f.fil+') · '+rd.ok.map(otName).join(" or ")+'</h2><p class="scen" style="font-size:28px">'+rd.why+'</p></div>';
     } else {
       h+='<div class="card"><p class="eyebrow">Scenario</p><p class="scen">'+rd.scenario+'</p></div>';
     }
     if(ph==="ready") h+='<p class="muted" style="font-size:24px;margin-top:12px">Read the scenario aloud, then open answers.</p>';
     if(ph==="open"||ph==="locked") h+='<div style="margin-top:14px;display:flex;gap:30px;align-items:center"><div class="timer" id="tm">'+(ph==="open"?RADAR.SECONDS:0)+'</div><div class="chips">'+[...Array(N)].map((_,i)=>{const a=(A["r"+r]||{})[i+1];return '<span class="chip'+(a?' in':'')+'">Team '+(i+1)+(a?' ✓':' …')+'</span>';}).join("")+'</div></div>';
     if(ph==="revealed"){
-      h+='<div class="chips">'+[...Array(N)].map((_,i)=>{const t=i+1,a=(A["r"+r]||{})[t],aw=(S.awards["r"+r]||{})[t]||{f:0,ot:0,exp:0,tw:0};
-        const tag=a?'<span class="tag" style="background:'+fac(a.f).color+';border-color:'+fac(a.f).line+'">'+fac(a.f).letter+'</span> '+otName(a.ot):'no answer';
-        return '<div class="chip" style="flex:1 1 44%"><div class="ans">Team '+t+': '+tag+' '+(aw.f?'<span class="ok">✓</span>':'<span class="no">✗</span>')+'</div><div class="awardrow">+'+(aw.f+aw.ot)+' XP <button class="btn" onclick="bonus('+t+',\'exp\')">'+(aw.exp?'✓ ':'')+'+5 explained</button><button class="btn" onclick="bonus('+t+',\'tw\')">'+(aw.tw?'✓ ':'')+'+5 teamwork</button></div></div>';}).join("")+'</div>';
-      h+='<div class="card news"><p class="eyebrow">Trending now</p>'+rd.news+'<p class="muted sm">Source: '+rd.src+'</p></div>';
+      h+='<div class="chips rev">'+[...Array(N)].map((_,i)=>{const t=i+1,a=(A["r"+r]||{})[t],aw=(S.awards["r"+r]||{})[t]||{f:0,ot:0,exp:0,tw:0};
+        const tag=a?'<span class="tag" style="background:'+fac(a.f).color+';border-color:'+fac(a.f).line+';color:'+fac(a.f).text+'">'+fac(a.f).letter+'</span> '+otName(a.ot):'no answer';
+        return '<div class="chip"><div class="ans">Team '+t+': '+tag+' '+(aw.f?'<span class="ok">✓</span>':'<span class="no">✗</span>')+'</div><div class="awardrow">+'+(aw.f+aw.ot)+' XP</div><div class="awardrow"><button class="btn" onclick="bonus('+t+',\'exp\')">'+(aw.exp?'✓ ':'')+'+5 explained</button><button class="btn" onclick="bonus('+t+',\'tw\')">'+(aw.tw?'✓ ':'')+'+5 teamwork</button></div></div>';}).join("")+'</div>';
+      newsH='<div class="card news" style="margin-top:1.2vh"><p class="eyebrow">Trending now</p>'+rd.news+'<p class="muted sm">Source: '+rd.src+'</p></div>';
     }
     h+='<div class="ctrl">';
     if(ph==="ready") h+='<button class="btn primary" onclick="openAnswers()">Open answers ('+RADAR.SECONDS+'s)</button>';
@@ -209,7 +274,7 @@ function render(){
   }
   h+='<div class="ctrl"><button class="btn sm" onclick="resetAll()">Reset game</button></div></div>';
   const rows=[...Array(N)].map((_,i)=>[i+1,S.scores[i+1]||0]).sort((a,b)=>b[1]-a[1]);
-  h+='<div class="card"><h3>Scoreboard (XP)</h3><table class="score"><tr><th>Team</th><th class="r">XP</th></tr>'+rows.map(([t,s])=>'<tr><td>Team '+t+'</td><td class="r"><b>'+s+'</b></td></tr>').join("")+'</table></div></div>';
+  h+='<div><div class="card"><h3>Scoreboard (XP)</h3><table class="score"><tr><th>Team</th><th class="r">XP</th></tr>'+rows.map(([t,s])=>'<tr'+(s>0&&s===rows[0][1]?' class="lead"':'')+'><td>Team '+t+(s>0&&s===rows[0][1]?' ★':'')+'</td><td class="r"><b>'+s+'</b></td></tr>').join("")+'</table></div>'+newsH+'</div></div>';
   $("#app").innerHTML=h;
 }
 function tick(){
@@ -250,10 +315,10 @@ function render(){
   const {state, answers} = cur, r = state.round, rd = ROUNDS[r-1];
   let h = '<div style="display:flex;justify-content:space-between;align-items:center"><span class="pill">Team '+team+'</span><button class="btn" id="chg" style="font-size:14px;padding:6px 12px">Change team</button></div>';
   if(state.phase==="lobby"){
-    h += '<h2 style="margin-top:20px">Get ready</h2><p class="big">Waiting for the teacher to start Round 1.</p>';
+    h += '<h2 style="margin-top:20px">Handa na ba kayo?</h2><p class="big">Get ready. Waiting for the teacher to start Round 1.</p><div class="sampa">'+SAMP+'</div>';
   } else if(state.phase==="final"){
     const rows = Object.entries(state.scores).sort((a,b)=>b[1]-a[1]);
-    h += '<h2 style="margin-top:20px">Final scores</h2><div class="card" style="margin-top:10px">'+rows.map(([t,s],i)=>'<p class="big">'+(i+1)+'. Team '+t+': <b>'+s+' XP</b></p>').join("")+'</div>';
+    h += '<h2 style="margin-top:20px">Mabuhay! Final scores</h2><div class="card" style="margin-top:10px">'+rows.map(([t,s],i)=>'<p class="big">'+(i+1)+'. Team '+t+': <b>'+s+' XP</b></p>').join("")+'</div>';
   } else if(state.phase==="ready"){
     h += '<p class="eyebrow" style="margin-top:14px">Round '+r+' of '+ROUNDS.length+'</p><h2>Listen to the teacher</h2><p class="big">Read the scenario on the TV. Answers open in a moment.</p>';
   } else {
@@ -263,7 +328,7 @@ function render(){
       const left = Math.max(0, Math.ceil((state.openAt + state.seconds*1000 - Date.now())/1000));
       h += '<div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+rd.scenario+'</p></div>';
       h += '<p class="muted" style="margin:10px 0 0">Time left: <b>'+left+'s</b>. 1) Pick the factor.</p><div class="grid6">'
-        + FACTORS.map(x=>'<button class="fbtn'+(sel.f===x.id?' sel':'')+'" data-f="'+x.id+'" style="background:'+x.color+';border-color:'+x.line+'"'+(left<=0?' disabled':'')+'><div class="l">'+x.letter+'</div><div class="n">'+x.name+'</div></button>').join("") + '</div>';
+        + FACTORS.map(x=>'<button class="fbtn'+(sel.f===x.id?' sel':'')+'" data-f="'+x.id+'" style="background:'+x.color+';border-color:'+x.line+';color:'+x.text+'"'+(left<=0?' disabled':'')+'><div class="l">'+x.letter+'</div><div class="n">'+x.name+'</div></button>').join("") + '</div>';
       h += '<p class="muted" style="margin:14px 0 0">2) Opportunity or threat?</p><div class="ot"><button class="btn'+(sel.ot==="O"?' sel':'')+'" data-o="O">Opportunity</button><button class="btn'+(sel.ot==="T"?' sel':'')+'" data-o="T">Threat</button></div>';
       h += '<button class="btn primary" id="send" style="width:100%;margin-top:14px"'+((sel.f&&sel.ot&&left>0)?'':' disabled')+'>Send answer</button>';
       if(mine) h += '<p class="ok" style="margin-top:10px">Sent: '+fac(mine.f).name+' · '+(mine.ot==="O"?"Opportunity":"Threat")+'. You may change it before time is up.</p>';
@@ -271,8 +336,8 @@ function render(){
       h += '<div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+rd.scenario+'</p></div><h3 style="margin-top:16px">Time is up</h3><p class="big">'+(mine?'Your answer was sent. Waiting for the reveal.':'No answer was sent.')+'</p>';
     } else if(state.phase==="revealed"){
       const aw = (state.awards["r"+r]||{})[team]||{f:0,ot:0,exp:0,tw:0}, total = aw.f+aw.ot+aw.exp+aw.tw;
-      h += '<div class="card" style="margin-top:6px;background:'+f.color+';border-color:'+f.line+'"><p class="eyebrow">Correct answer</p><h2>'+f.name+' · '+rd.ok.map(x=>x==="O"?"Opportunity":"Threat").join(" or ")+'</h2><p class="big">'+rd.why+'</p></div>';
-      h += '<div class="card" style="margin-top:12px"><p class="big" style="margin:0">'+(mine?('You chose <b>'+fac(mine.f).name+'</b> · '+(mine.ot==="O"?"Opportunity":"Threat")+'. '):'No answer sent. ')+'<br>Round XP: <b>'+total+'</b> · Team total: <b>'+(state.scores[team]||0)+' XP</b></p></div>';
+      h += '<div class="card" style="margin-top:6px;background:'+f.tint+';border-color:'+f.line+'"><p class="eyebrow">Correct answer</p><h2>'+f.name+' · '+rd.ok.map(x=>x==="O"?"Opportunity":"Threat").join(" or ")+'</h2><p class="big">'+rd.why+'</p></div>';
+      h += '<div class="card" style="margin-top:12px"><p class="big" style="margin:0">'+(aw.f?'<b class="ok">Tama!</b> ':'<b class="no">Mali.</b> ')+(mine?('You chose <b>'+fac(mine.f).name+'</b> · '+(mine.ot==="O"?"Opportunity":"Threat")+'. '):'No answer sent. ')+'<br>Round XP: <b>'+total+'</b> · Team total: <b>'+(state.scores[team]||0)+' XP</b></p></div>';
     }
   }
   $("#app").innerHTML = h;
