@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Radar · PESTEL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FFF8EC;--ink:#3A3354;--ink2:#4F4870;--accent:#7B58C4;--card:#FFFDF8;--line:#E6DACB}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink2);font-family:'Nunito','Trebuchet MS',Arial,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:'Fredoka','Trebuchet MS',Arial,sans-serif;color:var(--ink);margin:0}
+.banig{height:14px;background:repeating-linear-gradient(90deg,#DCD0F5 0 28px,#FFE8A3 28px 56px,#FBCBD8 56px 84px,#C4E4F8 84px 112px,#C4ECD7 112px 140px,#FFD4B8 140px 168px)}
+.wrap{max-width:780px;margin:0 auto;padding:18px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:18px 20px}
+.btn{font:inherit;font-weight:800;font-size:18px;border:3px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;padding:14px 18px;cursor:pointer}
+.btn.primary{background:#7B58C4;border-color:#7B58C4;color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-size:13px}
+.grid6{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.fbtn{border:4px solid;border-radius:22px;padding:14px 8px;text-align:center;cursor:pointer;font:inherit;color:var(--ink)}
+.fbtn .l{font-family:'Fredoka',Arial,sans-serif;font-size:44px;font-weight:600;line-height:1}
+.fbtn .n{font-weight:800;font-size:15px;margin-top:4px}
+.fbtn.sel{outline:6px solid #3A3354;outline-offset:2px}
+.fbtn:disabled{opacity:.5}
+.ot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.ot .btn.sel{background:#3A3354;color:#fff;border-color:#3A3354}
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.teams .btn{font-size:26px;padding:26px}
+.muted{color:#6B6485}
+.ok{color:#2F7D52;font-weight:800}.no{color:#B5483A;font-weight:800}
+.big{font-size:22px;line-height:1.4}
+.pill{display:inline-block;border-radius:999px;padding:4px 14px;font-weight:800;border:3px solid var(--line);background:#fff}
+/* host / TV */
+.tv{padding:28px 40px}
+.tv .top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.tv h1{font-size:44px}
+.layout{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;margin-top:20px}
+.scen{font-size:34px;line-height:1.35;color:var(--ink)}
+.timer{font-family:'Fredoka',Arial,sans-serif;font-size:96px;color:var(--accent);line-height:1}
+.chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.chip{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 16px;font-weight:800;font-size:20px}
+.chip.in{background:#C4ECD7;border-color:#8FD1AE}
+.score{width:100%;border-collapse:collapse;font-size:26px}
+.score td,.score th{padding:10px 8px;border-bottom:2px solid var(--line);text-align:left}
+.score td.r,.score th.r{text-align:right}
+.ctrl{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.ans{display:flex;align-items:center;gap:8px;font-size:22px}
+.tag{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;border-radius:14px;border:3px solid;font-family:'Fredoka',Arial,sans-serif;font-size:26px;font-weight:600;color:var(--ink)}
+.news{margin-top:16px;font-size:24px;line-height:1.35}
+.sm{font-size:16px}
+.awardrow{display:flex;gap:8px;align-items:center;margin-top:6px;font-size:18px}
+.awardrow .btn{font-size:16px;padding:6px 12px;border-radius:12px}
+
+@media(min-width:700px){.grid6{grid-template-columns:repeat(3,1fr)}.fbtn .l{font-size:56px}.scen2{font-size:28px}}
+
+</style></head><body>
+<div class="banig"></div>
+<div id="app"></div>
+<script>
+// ============ SETTINGS: edit these two lines ============
+// Business Radar settings.
+// ENDPOINT: paste your Google Apps Script web-app URL (see README). Leave "" to test on ONE computer (tabs share localStorage).
+window.RADAR = {
+  ENDPOINT: "",
+  HOST_KEY: "radar2026",   // change this; same value goes in Code.gs
+  TEAMS: 4,
+  SECONDS: 50
+};
+
+</script>
+<script>
+// Six Factor Hunt rounds. Edit scenario/news text freely. ok = accepted Opportunity/Threat answers.
+window.FACTORS = [
+  {id:"P",  letter:"P", name:"Political",     fil:"Pulitikal",       color:"#DCD0F5", line:"#B8A3E8"},
+  {id:"Ec", letter:"E", name:"Economic",      fil:"Ekonomiko",       color:"#FFE8A3", line:"#EBC85A"},
+  {id:"S",  letter:"S", name:"Social",        fil:"Sosyal",          color:"#FBCBD8", line:"#EE9DB5"},
+  {id:"T",  letter:"T", name:"Technological", fil:"Teknolohikal",    color:"#C4E4F8", line:"#8CC3E8"},
+  {id:"En", letter:"E", name:"Environmental", fil:"Pangkapaligiran", color:"#C4ECD7", line:"#8FD1AE"},
+  {id:"L",  letter:"L", name:"Legal",         fil:"Ligal",           color:"#FFD4B8", line:"#EFA67A"}
+];
+window.ROUNDS = [
+  {f:"P", ok:["O"], scenario:"The local government offers a one-year tax break and free stalls for small food businesses in the barangay.",
+   why:"Government policy and taxes affect the business. A tax break lowers costs.",
+   news:"On Nov 14, 2026, Indigenous protesters rallied in Quezon City against the US-led Pax Silica project during the US president's visit. SCMP reports it promises up to 200,000 jobs but lacks tenants, power and water.",
+   src:"Tech Policy Press (Nov 16); SCMP (Nov 13)"},
+  {f:"Ec", ok:["T"], scenario:"Cooking oil rose from ₱100 to ₱120 per liter, and families have less money for snacks.",
+   why:"Inflation and buying power are affected. (120 − 100) ÷ 100 = a 20% price increase.",
+   news:"PSA reported October 2026 inflation at 7.8%, the fastest since February 2023, driven by higher fuel and transport costs. Food inflation eased to 6.4%.",
+   src:"PSA via Philstar (Nov 6)"},
+  {f:"S", ok:["O","T"], scenario:"Students suddenly want bandanas and friendship bracelets they saw on social media.",
+   why:"An opportunity for shops that stock the trend quickly; a threat for shops left with items that go out of style.",
+   news:"PBB Collab 3.0 housemate Gehlee Dangca wrote a song, “Friendship Bracelet,” inspired by a bracelet from Jeo Ong. A fan page also features a bandana moment.",
+   src:"GMA News (Nov 19); Jeolee Cupids (fan-run page)"},
+  {f:"T", ok:["O","T"], scenario:"Most students pay with GCash and order food through social media and delivery apps. 30 of 120 orders are online.",
+   why:"An opportunity for shops that adapt; a threat for those that don't. 30 ÷ 120 = 25% online.",
+   news:"The Philippines is turning to AI for weather forecasts, giving households, businesses and local governments more time to respond to typhoons, heavy rain and extreme heat.",
+   src:"InsiderPH (Nov 17)"},
+  {f:"En", ok:["O","T"], scenario:"The barangay starts a “bring your own cup” program. Biodegradable cups cost ₱3 more each, and the shop sells 100 cups a day.",
+   why:"A threat to costs (100 × ₱3 = ₱300 more per day); an opportunity for eco-friendly shops.",
+   news:"PSA chief Dennis Mapa said El Niño is expected to affect the supply of farm products and, in turn, food prices.",
+   src:"Philstar (Nov 6)"},
+  {f:"L", ok:["O","T"], scenario:"All food stalls need a sanitary permit and must display prices, or pay a fine.",
+   why:"Extra cost (threat) but more customer trust (opportunity). Laws, permits and regulations are the focus.",
+   news:"Vlogger Geo Ong surrendered his driver's license to the LTO on Nov 23, 2026 over viral traffic violations. The law applies to everyone.",
+   src:"GMA News (Nov 23)"}
+];
+
+</script>
+<script>
+// Shared state. Remote = Google Apps Script. Local = localStorage (testing on one computer).
+(function(){
+  const C = window.RADAR;
+  const remote = !!C.ENDPOINT;
+  const BLANK = () => ({round:0, phase:"lobby", openAt:0, seconds:C.SECONDS, v:0, scores:{1:0,2:0,3:0,4:0}, awards:{}});
+  async function call(params){
+    const u = C.ENDPOINT + (C.ENDPOINT.includes("?")?"&":"?") + new URLSearchParams(params).toString() + "&_=" + Date.now();
+    const r = await fetch(u, {redirect:"follow"});
+    return r.json();
+  }
+  const L = {
+    get(){ return {state: JSON.parse(localStorage.getItem("br_state")||"null")||BLANK(), answers: JSON.parse(localStorage.getItem("br_answers")||"{}")}; }
+  };
+  window.Store = {
+    blank: BLANK, remote,
+    async get(){ if(remote){ const d = await call({a:"get"}); if(!d.state) d.state = BLANK(); d.answers = d.answers||{}; return d; } return L.get(); },
+    async setState(st, answers){
+      st.v = (st.v||0)+1;
+      if(remote){ await call({a:"set", key:C.HOST_KEY, state:JSON.stringify(st), answers: answers?JSON.stringify(answers):""}); return; }
+      localStorage.setItem("br_state", JSON.stringify(st));
+      if(answers) localStorage.setItem("br_answers", JSON.stringify(answers));
+    },
+    async answer(round, team, f, ot){
+      if(remote){ return call({a:"answer", round, team, f, ot}); }
+      const d = L.get();
+      if(d.state.phase!=="open") return {ok:false, msg:"closed"};
+      if(Date.now() > d.state.openAt + d.state.seconds*1000 + 3000) return {ok:false, msg:"time"};
+      const k = "r"+round; d.answers[k] = d.answers[k]||{};
+      d.answers[k][team] = {f, ot, t:Date.now()};
+      localStorage.setItem("br_answers", JSON.stringify(d.answers));
+      return {ok:true};
+    }
+  };
+})();
+
+</script>
+<script>
+const $ = s => document.querySelector(s);
+function runLanding(){
+  $('#app').className='wrap';
+  const base=location.href.split('#')[0];
+  $('#app').innerHTML='<p class="eyebrow">Applied Economics 12 · ABM</p><h1>Business Radar</h1><p class="big">PESTEL Factor Hunt. One tablet per team: the Recorder answers for the team.</p>'
+   +'<div class="card" style="margin-top:14px"><h3>Team tablet</h3><p>Choose your team and answer each round.</p><a href="#team" onclick="setTimeout(()=>location.reload(),50)"><button class="btn primary">Join as team</button></a></div>'
+   +'<div class="card" style="margin-top:14px"><h3>Teacher (TV screen)</h3><p>Open on the laptop connected to the TV.</p><a href="#host" onclick="setTimeout(()=>location.reload(),50)"><button class="btn">Open host screen</button></a></div>'
+   +'<p class="muted sm" style="margin-top:14px">Tablets: '+base+'#team<br>Teacher: '+base+'#host</p>';
+}
+function runHost(){
+$('#app').className='tv';
+const N = RADAR.TEAMS;
+let S = null, A = {}, busy = false;
+const fac = id => FACTORS.find(x=>x.id===id);
+const otName = o => o==="O"?"Opportunity":"Threat";
+async function save(answers){ busy=true; try{ await Store.setState(S, answers); } finally { busy=false; } render(); }
+function startRound(r){ S.round=r; S.phase="ready"; S.openAt=0; save(); }
+function openAnswers(){ S.phase="open"; S.openAt=Date.now(); S.seconds=RADAR.SECONDS; save(); }
+function lockNow(){ if(S.phase==="open"){ S.phase="locked"; save(); } }
+function reveal(){
+  const r=S.round, rd=ROUNDS[r-1], k="r"+r; S.awards[k]=S.awards[k]||{};
+  for(let t=1;t<=N;t++){
+    const a=(A[k]||{})[t]; const aw={f:0,ot:0,exp:0,tw:0};
+    if(a){ if(a.f===rd.f) aw.f=10; if(rd.ok.includes(a.ot)) aw.ot=5; }
+    S.awards[k][t]=aw; S.scores[t]=(S.scores[t]||0)+aw.f+aw.ot;
+  }
+  S.phase="revealed"; save();
+}
+function bonus(t,key){
+  const aw=S.awards["r"+S.round][t]; const on=aw[key]>0; aw[key]=on?0:5; S.scores[t]+=on?-5:5; save();
+}
+function finish(){ S.phase="final"; save(); }
+function resetAll(){ if(confirm("Reset all scores and answers?")){ S=Store.blank(); A={}; save({}); } }
+function render(){
+  if(!S) return;
+  const r=S.round, rd=ROUNDS[r-1], ph=S.phase;
+  let h='<div class="top"><div><p class="eyebrow">Applied Economics 12 · PESTEL</p><h1>Business Radar'+(r?(' · Round '+r+' of '+ROUNDS.length):'')+'</h1></div><div class="muted sm">'+(Store.remote?'Online mode':'Test mode (one computer)')+' · <a href="#team" target="_blank">team page</a></div></div>';
+  h+='<div class="layout"><div>';
+  if(ph==="lobby"){
+    h+='<div class="card"><h2>Ready to play</h2><p class="scen">Teams: open the team link (index.html#team) on your tablet and choose your team.</p><div class="ctrl"><button class="btn primary" onclick="startRound(1)">Start Round 1</button></div></div>';
+  } else if(ph==="final"){
+    const rows=Object.entries(S.scores).sort((a,b)=>b[1]-a[1]);
+    h+='<div class="card"><h2>Final scores</h2><p class="scen">'+rows.map(([t,s],i)=>(i+1)+'. Team '+t+' · <b>'+s+' XP</b>').join('<br>')+'</p><p class="muted">Add the Boss Round and Lightning Round points on the board.</p></div>';
+  } else {
+    const f=fac(rd.f);
+    if(ph==="revealed"){
+      h+='<div class="card" style="background:'+f.color+';border-color:'+f.line+'"><p class="eyebrow">Answer</p><h2 style="font-size:48px">'+f.letter+' · '+f.name+' ('+f.fil+') · '+rd.ok.map(otName).join(" or ")+'</h2><p class="scen" style="font-size:28px">'+rd.why+'</p></div>';
+    } else {
+      h+='<div class="card"><p class="eyebrow">Scenario</p><p class="scen">'+rd.scenario+'</p></div>';
+    }
+    if(ph==="ready") h+='<p class="muted" style="font-size:24px;margin-top:12px">Read the scenario aloud, then open answers.</p>';
+    if(ph==="open"||ph==="locked") h+='<div style="margin-top:14px;display:flex;gap:30px;align-items:center"><div class="timer" id="tm">'+(ph==="open"?RADAR.SECONDS:0)+'</div><div class="chips">'+[...Array(N)].map((_,i)=>{const a=(A["r"+r]||{})[i+1];return '<span class="chip'+(a?' in':'')+'">Team '+(i+1)+(a?' ✓':' …')+'</span>';}).join("")+'</div></div>';
+    if(ph==="revealed"){
+      h+='<div class="chips">'+[...Array(N)].map((_,i)=>{const t=i+1,a=(A["r"+r]||{})[t],aw=(S.awards["r"+r]||{})[t]||{f:0,ot:0,exp:0,tw:0};
+        const tag=a?'<span class="tag" style="background:'+fac(a.f).color+';border-color:'+fac(a.f).line+'">'+fac(a.f).letter+'</span> '+otName(a.ot):'no answer';
+        return '<div class="chip" style="flex:1 1 44%"><div class="ans">Team '+t+': '+tag+' '+(aw.f?'<span class="ok">✓</span>':'<span class="no">✗</span>')+'</div><div class="awardrow">+'+(aw.f+aw.ot)+' XP <button class="btn" onclick="bonus('+t+',\'exp\')">'+(aw.exp?'✓ ':'')+'+5 explained</button><button class="btn" onclick="bonus('+t+',\'tw\')">'+(aw.tw?'✓ ':'')+'+5 teamwork</button></div></div>';}).join("")+'</div>';
+      h+='<div class="card news"><p class="eyebrow">Trending now</p>'+rd.news+'<p class="muted sm">Source: '+rd.src+'</p></div>';
+    }
+    h+='<div class="ctrl">';
+    if(ph==="ready") h+='<button class="btn primary" onclick="openAnswers()">Open answers ('+RADAR.SECONDS+'s)</button>';
+    if(ph==="open") h+='<button class="btn" onclick="lockNow()">Lock now</button>';
+    if(ph==="locked") h+='<button class="btn primary" onclick="reveal()">Reveal answer</button>';
+    if(ph==="revealed") h+= r<ROUNDS.length ? '<button class="btn primary" onclick="startRound('+(r+1)+')">Next: Round '+(r+1)+'</button>' : '<button class="btn primary" onclick="finish()">Show final scores</button>';
+    h+='</div>';
+  }
+  h+='<div class="ctrl"><button class="btn sm" onclick="resetAll()">Reset game</button></div></div>';
+  const rows=[...Array(N)].map((_,i)=>[i+1,S.scores[i+1]||0]).sort((a,b)=>b[1]-a[1]);
+  h+='<div class="card"><h3>Scoreboard (XP)</h3><table class="score"><tr><th>Team</th><th class="r">XP</th></tr>'+rows.map(([t,s])=>'<tr><td>Team '+t+'</td><td class="r"><b>'+s+'</b></td></tr>').join("")+'</table></div></div>';
+  $("#app").innerHTML=h;
+}
+function tick(){
+  if(!S) return;
+  if(S.phase==="open"){
+    const left=Math.max(0,Math.ceil((S.openAt+S.seconds*1000-Date.now())/1000));
+    const el=$("#tm"); if(el) el.textContent=left;
+    if(left<=0 && !busy) lockNow();
+  }
+}
+async function poll(){
+  if(busy) return;
+  try{
+    const d=await Store.get();
+    if(!S){ S=d.state; A=d.answers; render(); return; }
+    const before=JSON.stringify(A); A=d.answers;
+    if(JSON.stringify(A)!==before) render();
+  }catch(e){}
+}
+poll(); setInterval(poll,1500); setInterval(tick,250);
+
+Object.assign(window,{startRound,openAnswers,lockNow,reveal,bonus,finish,resetAll});
+}
+function runTeam(){
+$('#app').className='wrap';
+const TS = Store.remote ? localStorage : sessionStorage;
+let team = TS.getItem("br_team");
+let sel = {f:null, ot:null, round:-1}, sent = null, cur = null;
+function fac(id){ return FACTORS.find(x=>x.id===id); }
+function pickTeam(){
+  $("#app").innerHTML = '<p class="eyebrow">Business Radar</p><h1>Choose your team</h1><p class="muted">Only the Recorder uses this phone.</p><div class="teams">'
+   + [1,2,3,4].map(n=>'<button class="btn" data-t="'+n+'">Team '+n+'</button>').join("") + '</div>';
+  document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{team=b.dataset.t;TS.setItem("br_team",team);render();});
+}
+function render(){
+  if(!team) return pickTeam();
+  if(!cur) { $("#app").innerHTML = '<p class="muted">Connecting…</p>'; return; }
+  const {state, answers} = cur, r = state.round, rd = ROUNDS[r-1];
+  let h = '<div style="display:flex;justify-content:space-between;align-items:center"><span class="pill">Team '+team+'</span><button class="btn" id="chg" style="font-size:14px;padding:6px 12px">Change team</button></div>';
+  if(state.phase==="lobby"){
+    h += '<h2 style="margin-top:20px">Get ready</h2><p class="big">Waiting for the teacher to start Round 1.</p>';
+  } else if(state.phase==="final"){
+    const rows = Object.entries(state.scores).sort((a,b)=>b[1]-a[1]);
+    h += '<h2 style="margin-top:20px">Final scores</h2><div class="card" style="margin-top:10px">'+rows.map(([t,s],i)=>'<p class="big">'+(i+1)+'. Team '+t+': <b>'+s+' XP</b></p>').join("")+'</div>';
+  } else if(state.phase==="ready"){
+    h += '<p class="eyebrow" style="margin-top:14px">Round '+r+' of '+ROUNDS.length+'</p><h2>Listen to the teacher</h2><p class="big">Read the scenario on the TV. Answers open in a moment.</p>';
+  } else {
+    const f = fac(rd.f); const mine = (answers["r"+r]||{})[team];
+    h += '<p class="eyebrow" style="margin-top:14px">Round '+r+' of '+ROUNDS.length+'</p>';
+    if(state.phase==="open"){
+      const left = Math.max(0, Math.ceil((state.openAt + state.seconds*1000 - Date.now())/1000));
+      h += '<div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+rd.scenario+'</p></div>';
+      h += '<p class="muted" style="margin:10px 0 0">Time left: <b>'+left+'s</b>. 1) Pick the factor.</p><div class="grid6">'
+        + FACTORS.map(x=>'<button class="fbtn'+(sel.f===x.id?' sel':'')+'" data-f="'+x.id+'" style="background:'+x.color+';border-color:'+x.line+'"'+(left<=0?' disabled':'')+'><div class="l">'+x.letter+'</div><div class="n">'+x.name+'</div></button>').join("") + '</div>';
+      h += '<p class="muted" style="margin:14px 0 0">2) Opportunity or threat?</p><div class="ot"><button class="btn'+(sel.ot==="O"?' sel':'')+'" data-o="O">Opportunity</button><button class="btn'+(sel.ot==="T"?' sel':'')+'" data-o="T">Threat</button></div>';
+      h += '<button class="btn primary" id="send" style="width:100%;margin-top:14px"'+((sel.f&&sel.ot&&left>0)?'':' disabled')+'>Send answer</button>';
+      if(mine) h += '<p class="ok" style="margin-top:10px">Sent: '+fac(mine.f).name+' · '+(mine.ot==="O"?"Opportunity":"Threat")+'. You may change it before time is up.</p>';
+    } else if(state.phase==="locked"){
+      h += '<div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+rd.scenario+'</p></div><h3 style="margin-top:16px">Time is up</h3><p class="big">'+(mine?'Your answer was sent. Waiting for the reveal.':'No answer was sent.')+'</p>';
+    } else if(state.phase==="revealed"){
+      const aw = (state.awards["r"+r]||{})[team]||{f:0,ot:0,exp:0,tw:0}, total = aw.f+aw.ot+aw.exp+aw.tw;
+      h += '<div class="card" style="margin-top:6px;background:'+f.color+';border-color:'+f.line+'"><p class="eyebrow">Correct answer</p><h2>'+f.name+' · '+rd.ok.map(x=>x==="O"?"Opportunity":"Threat").join(" or ")+'</h2><p class="big">'+rd.why+'</p></div>';
+      h += '<div class="card" style="margin-top:12px"><p class="big" style="margin:0">'+(mine?('You chose <b>'+fac(mine.f).name+'</b> · '+(mine.ot==="O"?"Opportunity":"Threat")+'. '):'No answer sent. ')+'<br>Round XP: <b>'+total+'</b> · Team total: <b>'+(state.scores[team]||0)+' XP</b></p></div>';
+    }
+  }
+  $("#app").innerHTML = h;
+  $("#chg").onclick = ()=>{TS.removeItem("br_team");team=null;render();};
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{sel.f=b.dataset.f;render();});
+  document.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{sel.ot=b.dataset.o;render();});
+  const s = $("#send"); if(s) s.onclick = async ()=>{ s.disabled=true; await Store.answer(cur.state.round, team, sel.f, sel.ot); poll(); };
+}
+async function poll(){
+  try{
+    const d = await Store.get();
+    if(!cur || d.state.v!==cur.state.v || JSON.stringify(d.answers)!==JSON.stringify(cur.answers)){
+      if(!cur || d.state.round!==cur.state.round){ sel={f:null,ot:null,round:d.state.round}; }
+      cur = d; render();
+    } else if(d.state.phase==="open"){ cur=d; render(); }
+  }catch(e){ }
+}
+render(); poll(); setInterval(poll, 1500);
+
+}
+(function(){
+  const m=(location.hash||'').replace('#','');
+  if(m==='host') runHost(); else if(m==='team') runTeam(); else runLanding();
+  window.addEventListener('hashchange',()=>location.reload());
+})();
+</script>
+<!--
+=========== GOOGLE APPS SCRIPT (Code.gs): paste this in script.google.com, then Deploy > Web app (Execute as: Me, Access: Anyone) ===========
+// Business Radar backend. Deploy as Web app: Execute as ME, Who has access: ANYONE.
+// Set HOST_KEY to the same value as config.js
+const HOST_KEY = "radar2026";
+function out(o){ return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function doGet(e){
+  const p = e.parameter, props = PropertiesService.getScriptProperties();
+  const lock = LockService.getScriptLock(); lock.waitLock(5000);
+  try{
+    const state = JSON.parse(props.getProperty("state")||"null");
+    const answers = JSON.parse(props.getProperty("answers")||"{}");
+    if(p.a==="get") return out({state, answers});
+    if(p.a==="set"){
+      if(p.key!==HOST_KEY) return out({ok:false, msg:"key"});
+      props.setProperty("state", p.state);
+      if(p.answers!==undefined && p.answers!=="") props.setProperty("answers", p.answers);
+      return out({ok:true});
+    }
+    if(p.a==="answer"){
+      if(!state || state.phase!=="open") return out({ok:false, msg:"closed"});
+      if(Date.now() > state.openAt + state.seconds*1000 + 3000) return out({ok:false, msg:"time"});
+      const k="r"+p.round; answers[k]=answers[k]||{};
+      answers[k][p.team]={f:p.f, ot:p.ot, t:Date.now()};
+      props.setProperty("answers", JSON.stringify(answers));
+      return out({ok:true});
+    }
+    return out({ok:false});
+  } finally { lock.releaseLock(); }
+}
+
+-->
+</body></html>
