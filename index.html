@@ -29,7 +29,7 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:10px;backgr
 .ok{color:#0038A8;font-weight:800}.no{color:#CE1126;font-weight:800}
 .big{font-size:22px;line-height:1.4}
 .pill{display:inline-block;border-radius:999px;padding:4px 14px;font-weight:800;border:3px solid var(--line);background:#fff}
-/* host / TV */
+/* host / projector */
 .tv{padding:28px 40px}
 .tv .top{display:flex;justify-content:space-between;align-items:center;gap:20px}
 .tv h1{font-size:44px}
@@ -149,7 +149,7 @@ window.RADAR = {
 
 </script>
 <script>
-// Six Factor Hunt rounds. Edit scenario/news text freely. ok = accepted Opportunity/Threat answers.
+// Six Bantay-Merkado rounds. Edit scenario/news text freely. ok = accepted Opportunity/Threat answers.
 window.FACTORS = [
   {id:"P",  letter:"P", name:"Political",     fil:"Pulitikal",       color:"#0038A8", line:"#0A2463", text:"#FFFFFF", tint:"#DCE6FA"},
   {id:"Ec", letter:"E", name:"Economic",      fil:"Ekonomiko",       color:"#FCD116", line:"#C9A400", text:"#0A2463", tint:"#FFF4B8"},
@@ -163,11 +163,11 @@ window.CARDS = [
   {id:"A", biz:"Milk tea kiosk", facts:["Sugar and cup prices are rising","Many students order through apps","Bring-your-own-cup program"]},
   {id:"B", biz:"Carinderia", facts:["Rice and cooking oil prices went up","A sanitary permit is required","More students bring baon"]},
   {id:"C", biz:"Water refilling station", facts:["Floods are frequent in the rainy season","A water quality permit is required","Families want safe drinking water"]},
-  {id:"D", biz:"Online seller of school supplies", facts:["Many customers use GCash","New permits and taxes for online sellers","Big apps offer free-shipping promos"]}
+  {id:"D", biz:"Online seller of school supplies", facts:["Many customers use GCash","New permits and taxes apply to online sellers.","Big apps offer free-shipping promos"]}
 ];
 window.QUIZ = [
-  {q:"PESTEL looks at outside factors that the business owner cannot control.", a:true, why:"PESTEL analyzes the macro-environment: forces outside the business."},
-  {q:"A rise in ingredient prices caused by inflation is an economic factor.", a:true, why:"Inflation and prices belong to the Economic factor."},
+  {q:"PESTEL looks at outside factors the business owner cannot control.", a:true, why:"PESTEL analyzes the macro-environment: forces outside the business."},
+  {q:"A rise in ingredient prices due to inflation is an economic factor.", a:true, why:"Inflation and prices belong to the Economic factor."},
   {q:"A new rule requiring food stalls to have a sanitary permit is a legal factor.", a:true, why:"Laws, permits and regulations are the Legal factor."},
   {q:"PESTEL and SWOT are the same.", a:false, why:"SWOT also studies strengths and weaknesses inside the business; PESTEL looks only outside."},
   {q:"A factor is always a threat to every business.", a:false, why:"The same factor can be an opportunity for one business and a threat for another."}
@@ -175,28 +175,28 @@ window.QUIZ = [
 window.ROUNDS = [
   {f:"P", ok:["O"], scenario:"The local government offers a one-year tax break and free stalls for small food businesses in the barangay.",
    why:"Government policy and taxes affect the business. A tax break lowers costs.",
-   news:"On Nov 14, 2026, Indigenous protesters rallied in Quezon City against the US-led Pax Silica project during the US president's visit. SCMP reports it promises up to 200,000 jobs but lacks tenants, power and water.",
+   news:"On Nov 14, 2026, Indigenous protesters rallied in Quezon City against the US-led Pax Silica project during the US president’s visit. SCMP reports it promises up to 200,000 jobs but lacks tenants, power and water.",
    src:"Tech Policy Press (Nov 16); SCMP (Nov 13)"},
-  {f:"Ec", ok:["T"], scenario:"Cooking oil rose from ₱100 to ₱120 per liter, and families have less money for snacks.",
+  {f:"Ec", ok:["T"], scenario:"The price of cooking oil rose from ₱100 to ₱120 per liter, and families have less money for snacks.",
    why:"Inflation and buying power are affected. (120 − 100) ÷ 100 = a 20% price increase.",
    news:"PSA reported October 2026 inflation at 7.8%, the fastest since February 2023, driven by higher fuel and transport costs. Food inflation eased to 6.4%.",
-   src:"PSA via Philstar (Nov 6)"},
-  {f:"S", ok:["O","T"], scenario:"Students suddenly want bandanas and friendship bracelets they saw on social media.",
+   src:"PSA via Philstar (Nov 6); Manila Times (Nov 6)"},
+  {f:"S", ok:["O","T"], scenario:"Students near school suddenly want bandanas and friendship bracelets they saw on social media.",
    why:"An opportunity for shops that stock the trend quickly; a threat for shops left with items that go out of style.",
-   news:"PBB Collab 3.0 housemate Gehlee Dangca wrote a song, “Friendship Bracelet,” inspired by a bracelet from Jeo Ong. A fan page also features a bandana moment.",
-   src:"GMA News (Nov 19); Jeolee Cupids (fan-run page)"},
+   news:"PBB Collab 3.0 housemate Gehlee Dangca wrote a song, “Friendship Bracelet,” inspired by a bracelet from Jeo Ong (GMA News, Nov 19, 2026). A fan page also features a bandana moment. Moments like these can shift what students want to buy.",
+   src:"GMA News; Jeolee Cupids (fan-run page)"},
   {f:"T", ok:["O","T"], scenario:"Most students pay with GCash and order food through social media and delivery apps. 30 of 120 orders are online.",
    why:"An opportunity for shops that adapt; a threat for those that don't. 30 ÷ 120 = 25% online.",
-   news:"The Philippines is turning to AI for weather forecasts, giving households, businesses and local governments more time to respond to typhoons, heavy rain and extreme heat.",
-   src:"InsiderPH (Nov 17)"},
-  {f:"En", ok:["O","T"], scenario:"The barangay starts a “bring your own cup” program. Biodegradable cups cost ₱3 more each, and the shop sells 100 cups a day.",
+   news:"The Philippines is turning to artificial intelligence for weather forecasts, giving households, businesses and local governments more time to respond to typhoons, heavy rain and extreme heat.",
+   src:"InsiderPH (Nov 17, 2026)"},
+  {f:"En", ok:["O","T"], scenario:"The barangay started a “bring your own cup” program, and biodegradable cups cost ₱3 more each. The shop sells 100 cups a day.",
    why:"A threat to costs (100 × ₱3 = ₱300 more per day); an opportunity for eco-friendly shops.",
    news:"PSA chief Dennis Mapa said El Niño is expected to affect the supply of farm products and, in turn, food prices.",
-   src:"Philstar (Nov 6)"},
-  {f:"L", ok:["O","T"], scenario:"All food stalls need a sanitary permit and must display prices, or pay a fine.",
+   src:"Philstar (Nov 6, 2026)"},
+  {f:"L", ok:["O","T"], scenario:"All food stalls now need a sanitary permit and must display prices, or face a fine.",
    why:"Extra cost (threat) but more customer trust (opportunity). Laws, permits and regulations are the focus.",
-   news:"Vlogger Geo Ong surrendered his driver's license to the LTO on Nov 23, 2026 over viral traffic violations. The law applies to everyone.",
-   src:"GMA News (Nov 23)"}
+   news:"Vlogger Geo Ong surrendered his driver’s license to the LTO on Nov 23, 2026 over viral traffic violations in Palawan. The law applies to everyone, including the famous.",
+   src:"GMA News"}
 ];
 
 </script>
@@ -245,9 +245,9 @@ function runLanding(){
   $('#app').className='wrap';
   const base=location.href.split('#')[0];
   $('#app').innerHTML=brand('Applied Economics 12 · ABM')
-   +'<div class="landing-art"><div class="p">'+PAROL+'</div><div><h2>Mabuhay!</h2><p class="big">PESTEL Factor Hunt. One tablet per team: the Recorder answers for the team.</p></div></div><div class="sampa">'+SAMP+'</div>'
+   +'<div class="landing-art"><div class="p">'+PAROL+'</div><div><h2>Mabuhay!</h2><p class="big">PESTEL Business Radar. One tablet per team: the Recorder answers for the team.</p></div></div><div class="sampa">'+SAMP+'</div>'
    +'<div class="card" style="margin-top:1vh"><h3>Team tablet</h3><a href="#team" onclick="setTimeout(()=>location.reload(),50)"><button class="btn primary">Join as team</button></a></div>'
-   +'<div class="card" style="margin-top:1vh"><h3>Teacher (TV screen)</h3><a href="#host" onclick="setTimeout(()=>location.reload(),50)"><button class="btn">Open host screen</button></a></div>'
+   +'<div class="card" style="margin-top:1vh"><h3>Teacher (projector screen)</h3><a href="#host" onclick="setTimeout(()=>location.reload(),50)"><button class="btn">Open host screen</button></a></div>'
    +'<p class="muted sm" style="margin-top:1vh">Tablets: '+base+'#team<br>Teacher: '+base+'#host</p>';
 }
 function runHost(){
@@ -303,9 +303,9 @@ function menuHTML(){
   const cur=(st,n)=>((S.stage||'factor')===st&&S.phase!=='lobby'&&S.phase!=='final'&&(n==null||(st==='factor'?S.round===n:S.q===n)))?' primary':'';
   let h='<div class="ov"><div class="ovc"><h2 style="margin:0 0 1.2vh">Choose an activity</h2>';
   h+='<div class="ovr"><b>Home</b><button class="btn" onclick="go(\'home\')">Home screen</button></div>';
-  h+='<div class="ovr"><b>Activity 1 · Factor Hunt</b><span>'+ROUNDS.map((r,i)=>'<button class="btn'+cur('factor',i+1)+'" onclick="go(\'factor\','+(i+1)+')">Round '+(i+1)+done('r'+(i+1))+'</button>').join('')+'</span></div>';
-  h+='<div class="ovr"><b>Activity 2 · Boss Round</b><span><button class="btn'+cur('boss')+'" onclick="go(\'boss\',1)">Open Boss Round'+(has(S.awards.boss)?' ✓':'')+'</button><button class="btn" onclick="go(\'boss\',1,true)">Re-run (clear answers)</button></span></div>';
-  h+='<div class="ovr"><b>Activity 3 · Lightning Round</b><span>'+QUIZ.map((r,i)=>'<button class="btn'+cur('lightning',i+1)+'" onclick="go(\'lightning\','+(i+1)+')">Item '+(i+1)+done('q'+(i+1))+'</button>').join('')+'</span></div>';
+  h+='<div class="ovr"><b>Activity 1 · Bantay-Merkado <small>(Market watch: find the factor)</small></b><span>'+ROUNDS.map((r,i)=>'<button class="btn'+cur('factor',i+1)+'" onclick="go(\'factor\','+(i+1)+')">Round '+(i+1)+done('r'+(i+1))+'</button>').join('')+'</span></div>';
+  h+='<div class="ovr"><b>Activity 2 · Payo sa Negosyo <small>(Advice for the owner)</small></b><span><button class="btn'+cur('boss')+'" onclick="go(\'boss\',1)">Open Payo sa Negosyo'+(has(S.awards.boss)?' ✓':'')+'</button><button class="btn" onclick="go(\'boss\',1,true)">Re-run (clear answers)</button></span></div>';
+  h+='<div class="ovr"><b>Activity 3 · Kita o Lugi <small>(Gain or loss: true or false)</small></b><span>'+QUIZ.map((r,i)=>'<button class="btn'+cur('lightning',i+1)+'" onclick="go(\'lightning\','+(i+1)+')">Item '+(i+1)+done('q'+(i+1))+'</button>').join('')+'</span></div>';
   h+='<div class="ovr"><b>Results</b><button class="btn" onclick="go(\'final\')">Final scores</button></div>';
   h+='<div class="ctrl"><button class="btn" onclick="toggleMenu()">Close</button></div></div></div>';
   return h;
@@ -332,23 +332,23 @@ function factorView(){
   if(ph==='ready') h+='<button class="btn primary" onclick="openAnswers('+RADAR.SECONDS+')">Open answers ('+RADAR.SECONDS+'s)</button>';
   if(ph==='open') h+='<button class="btn" onclick="lockNow()">Lock now</button>';
   if(ph==='locked') h+='<button class="btn primary" onclick="reveal()">Reveal answer</button>';
-  if(ph==='revealed') h+= (r<ROUNDS.length ? '<button class="btn primary" onclick="startRound('+(r+1)+')">Next: Round '+(r+1)+'</button>' : '<button class="btn primary" onclick="startBoss()">Next: Boss Round</button>')+'<button class="btn" onclick="replay()">Replay</button>';
+  if(ph==='revealed') h+= (r<ROUNDS.length ? '<button class="btn primary" onclick="startRound('+(r+1)+')">Next: Round '+(r+1)+'</button>' : '<button class="btn primary" onclick="startBoss()">Next: Payo sa Negosyo</button>')+'<button class="btn" onclick="replay()">Replay</button>';
   return {h:h+'</div>',side};
 }
 function bossView(){
   const ph=S.phase; let h='', side='';
   if(ph==='ready'){
-    h+='<div class="card"><h2>Boss Round: Business Radar Report</h2><p class="scen" style="font-size:clamp(15px,2.8vh,28px)">Each team gets a business card. On your tablet: fill the PESTEL grid, mark each factor Opportunity or Threat and write one recommendation. You have 4 minutes.</p></div>';
+    h+='<div class="card"><h2>Payo sa Negosyo: Advice for the Owner</h2><p class="scen" style="font-size:clamp(15px,2.8vh,28px)">Each team gets a business card. On your tablet: fill the PESTEL grid, mark each factor Opportunity or Threat and write one recommendation. You have 4 minutes.</p></div>';
     h+='<div class="chips">'+CARDS.slice(0,N).map((c,i)=>'<span class="chip">Team '+(i+1)+' → Card '+c.id+': '+c.biz+'</span>').join('')+'</div>';
-    h+='<div class="ctrl"><button class="btn primary" onclick="openAnswers('+SECS_BOSS+')">Start Boss Round (4:00)</button></div>';
+    h+='<div class="ctrl"><button class="btn primary" onclick="openAnswers('+SECS_BOSS+')">Start Payo sa Negosyo (4:00)</button></div>';
   } else if(ph==='open'||ph==='locked'){
-    h+='<div class="card"><p class="eyebrow">Boss Round</p><p class="scen">Fill the PESTEL grid for your card. Write one recommendation.</p></div>'+timerBlock('boss');
+    h+='<div class="card"><p class="eyebrow">Payo sa Negosyo</p><p class="scen">Fill the PESTEL grid for your card. Write one recommendation.</p></div>'+timerBlock('boss');
     h+='<div class="ctrl">'+(ph==='open'?'<button class="btn" onclick="lockNow()">Lock now</button>':'<button class="btn primary" onclick="presentBoss()">Present teams</button>')+'</div>';
   } else {
     const t=S.bossView||1, c=CARDS[t-1], a=(A.boss||{})[t]||{rows:{}}, aw=(S.awards.boss||{})[t]||{c:0,e:0,r:0};
     h+='<div class="card"><p class="eyebrow">Team '+t+' · Card '+c.id+' · '+c.biz+'</p>'+FACTORS.map(f=>{const r=(a.rows&&a.rows[f.id])||{};return '<div class="brow">'+tagHTML(f)+'<span class="btxt">'+esc(r.t||'—')+'</span><span class="otp">'+(r.ot?otName(r.ot):'—')+'</span></div>';}).join('')+'</div>';
     h+='<div class="card"><p class="scen" style="font-size:clamp(14px,2.7vh,26px);margin:0"><b>Recommendation:</b> '+esc(a.rec||'—')+'</p></div>';
-    h+='<div class="ctrl"><button class="btn" onclick="bossTeam(-1)"'+(t<=1?' disabled':'')+'>◀ Previous team</button>'+(t<N?'<button class="btn primary" onclick="bossTeam(1)">Next team ▶</button>':'<button class="btn primary" onclick="startQuiz(1)">Next: Lightning Round</button>')+'</div>';
+    h+='<div class="ctrl"><button class="btn" onclick="bossTeam(-1)"'+(t<=1?' disabled':'')+'>◀ Previous team</button>'+(t<N?'<button class="btn primary" onclick="bossTeam(1)">Next team ▶</button>':'<button class="btn primary" onclick="startQuiz(1)">Next: Kita o Lugi</button>')+'</div>';
     const rows=[['c','Factors classified correctly'],['e','Effect explained (opportunity or threat)'],['r','Realistic recommendation and teamwork']];
     side='<div class="card" style="margin-top:1.2vh"><h3>Rubric: Team '+t+' ('+(aw.c+aw.e+aw.r)+'/30)</h3>'+rows.map(([k,l])=>'<div class="rub"><span>'+l+'</span><span>'+[0,5,10].map(v=>'<button class="btn'+(aw[k]===v?' sel':'')+'" onclick="bossScore('+t+',\''+k+'\','+v+')">'+v+'</button>').join('')+'</span></div>').join('')+'</div>';
   }
@@ -372,15 +372,15 @@ function quizView(){
 function render(){
   if(!S) return;
   const st=S.stage||'factor', ph=S.phase;
-  const label = ph==='lobby'?'' : st==='factor'?' · Round '+S.round+' of '+ROUNDS.length : st==='boss'?' · Boss Round' : st==='lightning'?' · Lightning Round' : '';
+  const label = ph==='lobby'?'' : st==='factor'?' · Round '+S.round+' of '+ROUNDS.length : st==='boss'?' · Payo sa Negosyo' : st==='lightning'?' · Kita o Lugi' : '';
   let h='<div class="top">'+brand('Applied Economics 12 · PESTEL'+label)+'<span class="parolic">'+PAROL+'</span><div class="muted sm" style="margin-right:6vw">'+(Store.remote?'Online mode':'Test mode (one computer)')+' · <a href="#team" target="_blank">team page</a></div></div>';
   h+='<div class="layout"><div>';
   let side='';
   if(ph==='lobby'){
-    h+='<div class="card"><h2>Handa na? Ready to play</h2><p class="scen">Teams: open the team link (index.html#team) on your tablet and choose your team.</p><div class="ctrl"><button class="btn primary" onclick="startRound(1)">Start Round 1</button></div></div>';
+    h+='<div class="card"><h2>Bukas na ang Tindahan! Ready to play</h2><p class="scen">Teams: open the team link (index.html#team) on your tablet and choose your team.</p><div class="ctrl"><button class="btn primary" onclick="startRound(1)">Start Round 1</button></div></div>';
   } else if(ph==='final'||st==='final'){
     const rows=Object.entries(S.scores).sort((a,b)=>b[1]-a[1]);
-    h+='<div class="card"><h2>Mabuhay! Final scores</h2><p class="scen">'+rows.map(([t,s],i)=>(i+1)+'. Team '+t+' · <b>'+s+' XP</b>').join('<br>')+'</p></div>';
+    h+='<div class="card"><h2>Sara na ang Tindahan! Final scores</h2><p class="scen">'+rows.map(([t,s],i)=>(i+1)+'. Team '+t+' · <b>'+s+' XP</b>').join('<br>')+'</p></div>';
   } else {
     const v = st==='boss'?bossView(): st==='lightning'?quizView(): factorView();
     h+=v.h; side=v.side||'';
@@ -427,7 +427,7 @@ function pickTeam(){
 const head=()=>'<div style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;gap:8px;align-items:center"><span class="pill">Team '+team+'</span><button class="btn'+(home?' primary':'')+'" id="hm" style="font-size:14px;padding:6px 12px">🏠 Home</button></span><button class="btn" id="chg" style="font-size:14px;padding:6px 12px">Change team</button></div>';
 const has2=o=>!!o&&Object.keys(o).length>0;
 function actNow(){ const st=cur.state, ph=st.phase; if(ph==='lobby') return 0; if(ph==='final'||st.stage==='final') return 4; const s2=st.stage||'factor'; return s2==='factor'?1:s2==='boss'?2:3; }
-const ACTN=['','Activity 1 · Factor Hunt','Activity 2 · Boss Round','Activity 3 · Lightning Round'];
+const ACTN=['','Activity 1 · Bantay-Merkado (Market watch)','Activity 2 · Payo sa Negosyo (Business advice)','Activity 3 · Kita o Lugi (Gain or loss)'];
 function homeV(){
   const st=cur.state, now=actNow();
   const card=(i,sub)=>{ const lv=now===i, dn=now>i; return '<button class="btn hb'+(lv?' primary':'')+'" data-go="'+i+'" style="width:100%;margin-top:8px;padding:14px"><span style="font-size:20px">'+ACTN[i]+'</span><small style="font-size:13px">'+(lv?'LIVE NOW · tap to join':dn?'Finished':'Not open yet')+'</small></button>'; };
@@ -440,12 +440,12 @@ function homeV(){
 function view(){
   if(home) return homeV();
   const {state,answers}=cur, st=state.stage||'factor', ph=state.phase;
-  if(ph==='lobby') return '<h2 style="margin-top:20px">Handa na ba kayo?</h2><p class="big">Get ready. Waiting for the teacher to start Round 1.</p><div class="sampa">'+SAMP+'</div>';
+  if(ph==='lobby') return '<h2 style="margin-top:20px">Bukas na ang Tindahan!</h2><p class="big">Get ready. Waiting for the teacher to start Round 1.</p><div class="sampa">'+SAMP+'</div>';
   if(ph==='final'||st==='final'){
     const rows=Object.entries(state.scores).sort((a,b)=>b[1]-a[1]);
-    return '<h2 style="margin-top:20px">Mabuhay! Final scores</h2><div class="card" style="margin-top:10px">'+rows.map(([t,s],i)=>'<p class="big">'+(i+1)+'. Team '+t+': <b>'+s+' XP</b></p>').join('')+'</div>';
+    return '<h2 style="margin-top:20px">Sara na ang Tindahan! Final scores</h2><div class="card" style="margin-top:10px">'+rows.map(([t,s],i)=>'<p class="big">'+(i+1)+'. Team '+t+': <b>'+s+' XP</b></p>').join('')+'</div>';
   }
-  if(ph==='ready') return '<p class="eyebrow" style="margin-top:14px">'+(st==='factor'?'Round '+state.round+' of '+ROUNDS.length:st==='boss'?'Boss Round':'Lightning Round')+'</p><h2>Listen to the teacher</h2><p class="big">Look at the TV. Answers open in a moment.</p>';
+  if(ph==='ready') return '<p class="eyebrow" style="margin-top:14px">'+(st==='factor'?'Round '+state.round+' of '+ROUNDS.length:st==='boss'?'Payo sa Negosyo':'Kita o Lugi')+'</p><h2>Listen to the teacher</h2><p class="big">Look at the projector. Answers open in a moment.</p>';
   if(st==='factor') return factorV(state,answers,ph);
   if(st==='boss') return bossV(state,answers,ph);
   return quizV(state,answers,ph);
@@ -472,7 +472,7 @@ function bossV(state,answers,ph){
   const c=CARDS[(+team||1)-1], mine=(answers.boss||{})[team];
   if(ph==='open'){
     if(!draft) draft=(mine&&mine.rows)?{rows:mine.rows,rec:mine.rec||'',src:mine.src||''}:mkDraft();
-    let h='<div class="bhead"><span class="eyebrow">Boss Round · Card '+c.id+' · '+c.biz+'</span><b id="tl" class="timer2">'+tm(leftS())+'</b></div>';
+    let h='<div class="bhead"><span class="eyebrow">Payo sa Negosyo · Card '+c.id+' · '+c.biz+'</span><b id="tl" class="timer2">'+tm(leftS())+'</b></div>';
     h+='<div class="card bfacts">'+c.facts.join(' · ')+'</div><div class="bform">';
     h+=FACTORS.map(f=>{const r=draft.rows[f.id];return '<div class="brow"><span class="tag" style="background:'+f.color+';border-color:'+f.line+';color:'+f.text+'">'+f.letter+'</span><input class="inp" data-r="'+f.id+'" maxlength="60" placeholder="'+f.name+': what is happening?" value="'+esc(r.t)+'"><button class="ob'+(r.ot==='O'?' sel':'')+'" data-bo="'+f.id+':O">O</button><button class="ob'+(r.ot==='T'?' sel':'')+'" data-bo="'+f.id+':T">T</button></div>';}).join('');
     h+='<input class="inp" id="rec" maxlength="160" placeholder="Recommendation to the owner" value="'+esc(draft.rec)+'"></div>';
@@ -481,11 +481,11 @@ function bossV(state,answers,ph){
   }
   if(ph==='locked') return '<h3 style="margin-top:16px">Time is up</h3><p class="big">'+(mine?'Your report was sent. Get ready to present.':'No report was sent.')+'</p>';
   const aw=(state.awards.boss||{})[team]||{c:0,e:0,r:0};
-  return '<h2 style="margin-top:16px">Presentations</h2><p class="big">Watch the TV. Your Reporter presents when your team is shown.</p><div class="card"><p class="big" style="margin:0">Team total: <b>'+(state.scores[team]||0)+' XP</b>'+((aw.c+aw.e+aw.r)?' · Boss Round: <b>'+(aw.c+aw.e+aw.r)+'/30</b>':'')+'</p></div>';
+  return '<h2 style="margin-top:16px">Presentations</h2><p class="big">Watch the projector. Your Reporter presents when your team is shown.</p><div class="card"><p class="big" style="margin:0">Team total: <b>'+(state.scores[team]||0)+' XP</b>'+((aw.c+aw.e+aw.r)?' · Payo sa Negosyo: <b>'+(aw.c+aw.e+aw.r)+'/30</b>':'')+'</p></div>';
 }
 function quizV(state,answers,ph){
   const q=state.q, it=QUIZ[q-1], mine=(answers['q'+q]||{})[team];
-  let h='<p class="eyebrow" style="margin-top:14px">Lightning Round · '+q+' of '+QUIZ.length+'</p><div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+it.q+'</p></div>';
+  let h='<p class="eyebrow" style="margin-top:14px">Kita o Lugi · '+q+' of '+QUIZ.length+'</p><div class="card" style="margin-top:6px"><p class="big" style="margin:0">'+it.q+'</p></div>';
   if(ph==='open'){
     h+='<p class="muted" style="margin:10px 0 0">Time left: <b id="tl">'+leftS()+'s</b>. Tap your answer.</p><div class="tf"><button class="btn tfb'+(sel.v==='T'?' sel':'')+'" data-v="T" style="--c:#0038A8">TRUE</button><button class="btn tfb'+(sel.v==='F'?' sel':'')+'" data-v="F" style="--c:#CE1126">FALSE</button></div><p class="ok" id="msg">'+(mine?'Sent: '+(mine.v==='T'?'True':'False')+'. You may change it before time is up.':sentMsg)+'</p>';
   } else if(ph==='locked'){
