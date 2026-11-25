@@ -133,7 +133,7 @@ body{min-height:0}
 .tf{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1 1 0;min-height:0;margin-top:1vh}
 .tfb{font-family:'Fredoka',Arial,sans-serif;font-size:clamp(28px,7vh,56px)!important;border-color:var(--c)!important;color:var(--c);border-radius:3vh}
 .tfb.sel{background:var(--c)!important;color:#fff!important}
-</style></head><body>
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:6px}.hb{display:flex;flex-direction:column;align-items:center;padding:8px 6px;font-size:16px}.hb small{font-size:11px;font-weight:600;opacity:.85}.ov{position:fixed;inset:0;background:rgba(10,36,99,.6);display:flex;align-items:center;justify-content:center;z-index:50}.ovc{background:#FFFDF5;border:.5vh solid #0038A8;border-radius:2vh;padding:2.5vh 2.5vw;width:min(92vw,1100px);max-height:92vh;overflow:auto}.ovr{display:flex;align-items:center;gap:1.5vw;margin:1vh 0;flex-wrap:wrap}.ovr b{min-width:20vw;color:#0A2463}.ovr span{display:flex;gap:.8vw;flex-wrap:wrap}</style></head><body>
 <div class="banig"></div>
 <div id="app"></div>
 <script>
@@ -263,7 +263,7 @@ async function save(answers){ busy=true; try{ await Store.setState(S,answers); }
 function startRound(r){ S.stage='factor'; S.round=r; S.phase='ready'; S.openAt=0; save(); }
 function openAnswers(secs){ S.phase='open'; S.openAt=Date.now(); S.seconds=secs||RADAR.SECONDS; save(); }
 function lockNow(){ if(S.phase==='open'){ S.phase='locked'; save(); } }
-function addAward(k,t,obj,pts){ S.awards[k]=S.awards[k]||{}; S.awards[k][t]=obj; S.scores[t]=(S.scores[t]||0)+pts; }
+function addAward(k,t,obj,pts){ S.awards[k]=S.awards[k]||{}; const old=S.awards[k][t]; if(old) S.scores[t]=(S.scores[t]||0)-(old.f||0)-(old.ot||0)-(old.exp||0)-(old.tw||0); S.awards[k][t]=obj; S.scores[t]=(S.scores[t]||0)+pts; }
 async function reveal(){
   try{ const d=await Store.get(); A=d.answers; }catch(e){}
   if(S.stage==='lightning'){
@@ -285,6 +285,31 @@ async function presentBoss(){ try{ const d=await Store.get(); A=d.answers; }catc
 function bossTeam(d){ S.bossView=Math.min(N,Math.max(1,(S.bossView||1)+d)); save(); }
 function bossScore(t,key,val){ S.awards.boss=S.awards.boss||{}; const x=S.awards.boss[t]=S.awards.boss[t]||{c:0,e:0,r:0}; S.scores[t]=(S.scores[t]||0)+val-x[key]; x[key]=val; save(); }
 function startQuiz(q){ S.stage='lightning'; S.q=q; S.phase='ready'; S.openAt=0; save(); }
+let menuOpen=false;
+function toggleMenu(){ menuOpen=!menuOpen; render(); }
+function has(o){ return !!o && Object.keys(o).length>0; }
+function go(stage,n,fresh){
+  menuOpen=false; S.openAt=0;
+  if(stage==='home'){ S.phase='lobby'; }
+  else if(stage==='factor'){ S.stage='factor'; S.round=n; if(fresh) A['r'+n]={}; S.phase=(!fresh&&has(S.awards['r'+n]))?'revealed':'ready'; }
+  else if(stage==='boss'){ S.stage='boss'; S.bossView=1; if(fresh) A.boss={}; S.phase=(!fresh&&has(A.boss))?'present':'ready'; }
+  else if(stage==='lightning'){ S.stage='lightning'; S.q=n; if(fresh) A['q'+n]={}; S.phase=(!fresh&&has(S.awards['q'+n]))?'revealed':'ready'; }
+  else if(stage==='final'){ S.stage='final'; S.phase='final'; }
+  save(fresh?A:undefined);
+}
+function replay(){ const k=S.stage==='lightning'?'q'+S.q:S.stage==='boss'?'boss':'r'+S.round; A[k]={}; S.phase='ready'; S.openAt=0; save(A); }
+function menuHTML(){
+  const done=k=>has(S.awards[k])?' ✓':'';
+  const cur=(st,n)=>((S.stage||'factor')===st&&S.phase!=='lobby'&&S.phase!=='final'&&(n==null||(st==='factor'?S.round===n:S.q===n)))?' primary':'';
+  let h='<div class="ov"><div class="ovc"><h2 style="margin:0 0 1.2vh">Choose an activity</h2>';
+  h+='<div class="ovr"><b>Home</b><button class="btn" onclick="go(\'home\')">Home screen</button></div>';
+  h+='<div class="ovr"><b>Activity 1 · Factor Hunt</b><span>'+ROUNDS.map((r,i)=>'<button class="btn'+cur('factor',i+1)+'" onclick="go(\'factor\','+(i+1)+')">Round '+(i+1)+done('r'+(i+1))+'</button>').join('')+'</span></div>';
+  h+='<div class="ovr"><b>Activity 2 · Boss Round</b><span><button class="btn'+cur('boss')+'" onclick="go(\'boss\',1)">Open Boss Round'+(has(S.awards.boss)?' ✓':'')+'</button><button class="btn" onclick="go(\'boss\',1,true)">Re-run (clear answers)</button></span></div>';
+  h+='<div class="ovr"><b>Activity 3 · Lightning Round</b><span>'+QUIZ.map((r,i)=>'<button class="btn'+cur('lightning',i+1)+'" onclick="go(\'lightning\','+(i+1)+')">Item '+(i+1)+done('q'+(i+1))+'</button>').join('')+'</span></div>';
+  h+='<div class="ovr"><b>Results</b><button class="btn" onclick="go(\'final\')">Final scores</button></div>';
+  h+='<div class="ctrl"><button class="btn" onclick="toggleMenu()">Close</button></div></div></div>';
+  return h;
+}
 function finish(){ S.stage='final'; S.phase='final'; save(); }
 function resetAll(){ if(confirm('Reset all scores and answers?')){ S=Store.blank(); A={}; save({}); } }
 function chipsIn(key){ return '<div class="chips">'+[...Array(N)].map((_,i)=>{const a=(A[key]||{})[i+1];return '<span class="chip'+(a?' in':'')+'">Team '+(i+1)+(a?' ✓':' …')+'</span>';}).join('')+'</div>'; }
@@ -307,7 +332,7 @@ function factorView(){
   if(ph==='ready') h+='<button class="btn primary" onclick="openAnswers('+RADAR.SECONDS+')">Open answers ('+RADAR.SECONDS+'s)</button>';
   if(ph==='open') h+='<button class="btn" onclick="lockNow()">Lock now</button>';
   if(ph==='locked') h+='<button class="btn primary" onclick="reveal()">Reveal answer</button>';
-  if(ph==='revealed') h+= r<ROUNDS.length ? '<button class="btn primary" onclick="startRound('+(r+1)+')">Next: Round '+(r+1)+'</button>' : '<button class="btn primary" onclick="startBoss()">Next: Boss Round</button>';
+  if(ph==='revealed') h+= (r<ROUNDS.length ? '<button class="btn primary" onclick="startRound('+(r+1)+')">Next: Round '+(r+1)+'</button>' : '<button class="btn primary" onclick="startBoss()">Next: Boss Round</button>')+'<button class="btn" onclick="replay()">Replay</button>';
   return {h:h+'</div>',side};
 }
 function bossView(){
@@ -341,7 +366,7 @@ function quizView(){
   if(ph==='ready') h+='<button class="btn primary" onclick="openAnswers('+SECS_Q+')">Open answers ('+SECS_Q+'s)</button>';
   if(ph==='open') h+='<button class="btn" onclick="lockNow()">Lock now</button>';
   if(ph==='locked') h+='<button class="btn primary" onclick="reveal()">Reveal answer</button>';
-  if(ph==='revealed') h+= q<QUIZ.length ? '<button class="btn primary" onclick="startQuiz('+(q+1)+')">Next statement</button>' : '<button class="btn primary" onclick="finish()">Show final scores</button>';
+  if(ph==='revealed') h+= (q<QUIZ.length ? '<button class="btn primary" onclick="startQuiz('+(q+1)+')">Next statement</button>' : '<button class="btn primary" onclick="finish()">Show final scores</button>')+'<button class="btn" onclick="replay()">Replay</button>';
   return {h:h+'</div>',side};
 }
 function render(){
@@ -360,9 +385,10 @@ function render(){
     const v = st==='boss'?bossView(): st==='lightning'?quizView(): factorView();
     h+=v.h; side=v.side||'';
   }
-  h+='<div class="ctrl"><button class="btn sm" onclick="resetAll()">Reset game</button></div></div>';
+  h+='<div class="ctrl"><button class="btn sm primary" onclick="toggleMenu()">☰ Menu</button><button class="btn sm" onclick="resetAll()">Reset game</button></div></div>';
   const rows=[...Array(N)].map((_,i)=>[i+1,S.scores[i+1]||0]).sort((a,b)=>b[1]-a[1]);
   h+='<div><div class="card"><h3>Scoreboard (XP)</h3><table class="score"><tr><th>Team</th><th class="r">XP</th></tr>'+rows.map(([t,s])=>'<tr'+(s>0&&s===rows[0][1]?' class="lead"':'')+'><td>Team '+t+(s>0&&s===rows[0][1]?' ★':'')+'</td><td class="r"><b>'+s+'</b></td></tr>').join('')+'</table></div>'+side+'</div></div>';
+  if(menuOpen) h+=menuHTML();
   $('#app').innerHTML=h;
 }
 function tick(){
@@ -379,7 +405,7 @@ async function poll(){
     if(JSON.stringify(A)!==before) render();
   }catch(e){}
 }
-Object.assign(window,{startRound,openAnswers,lockNow,reveal,bonus,startBoss,presentBoss,bossTeam,bossScore,startQuiz,finish,resetAll});
+Object.assign(window,{go,replay,toggleMenu,startRound,openAnswers,lockNow,reveal,bonus,startBoss,presentBoss,bossTeam,bossScore,startQuiz,finish,resetAll});
 poll(); setInterval(poll,1500); setInterval(tick,250);
 }
 
@@ -387,7 +413,7 @@ function runTeam(){
 $('#app').className='wrap';
 const TS = Store.remote ? localStorage : sessionStorage;
 let team = TS.getItem('br_team');
-let sel={f:null,ot:null}, draft=null, cur=null, key='', sentMsg='';
+let sel={f:null,ot:null}, draft=null, cur=null, key='', sentMsg='', home=false, rev=null, hmsg='';
 const fac=id=>FACTORS.find(x=>x.id===id);
 const otN=o=>o==='O'?'Opportunity':'Threat';
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -398,8 +424,21 @@ function pickTeam(){
   $('#app').innerHTML='<p class="eyebrow">Business Radar</p><h1>Choose your team</h1><p class="muted">Only the Recorder uses this tablet.</p><div class="teams">'+[1,2,3,4].map(n=>'<button class="btn" data-t="'+n+'">Team '+n+'</button>').join('')+'</div>';
   document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{team=b.dataset.t;TS.setItem('br_team',team);render();});
 }
-const head=()=>'<div style="display:flex;justify-content:space-between;align-items:center"><span class="pill">Team '+team+'</span><button class="btn" id="chg" style="font-size:14px;padding:6px 12px">Change team</button></div>';
+const head=()=>'<div style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;gap:8px;align-items:center"><span class="pill">Team '+team+'</span><button class="btn'+(home?' primary':'')+'" id="hm" style="font-size:14px;padding:6px 12px">🏠 Home</button></span><button class="btn" id="chg" style="font-size:14px;padding:6px 12px">Change team</button></div>';
+const has2=o=>!!o&&Object.keys(o).length>0;
+function actNow(){ const st=cur.state, ph=st.phase; if(ph==='lobby') return 0; if(ph==='final'||st.stage==='final') return 4; const s2=st.stage||'factor'; return s2==='factor'?1:s2==='boss'?2:3; }
+const ACTN=['','Activity 1 · Factor Hunt','Activity 2 · Boss Round','Activity 3 · Lightning Round'];
+function homeV(){
+  const st=cur.state, now=actNow();
+  const card=(i,sub)=>{ const lv=now===i, dn=now>i; return '<button class="btn hb'+(lv?' primary':'')+'" data-go="'+i+'" style="width:100%;margin-top:8px;padding:14px"><span style="font-size:20px">'+ACTN[i]+'</span><small style="font-size:13px">'+(lv?'LIVE NOW · tap to join':dn?'Finished':'Not open yet')+'</small></button>'; };
+  let h='<h2 style="margin:14px 0 4px">Home</h2><p class="muted" style="margin:0">'+(now===0?'Waiting for your teacher to start.':now===4?'The game is finished.':'Tap the live activity to join what your teacher is showing.')+'</p>';
+  h+=card(1)+card(2)+card(3);
+  h+='<div class="card" style="margin-top:10px"><p class="big" style="margin:0">Team total: <b>'+(st.scores[team]||0)+' XP</b></p></div>';
+  h+='<p class="muted" id="hmsg" style="margin:8px 0 0">'+esc(hmsg)+'</p>';
+  return h;
+}
 function view(){
+  if(home) return homeV();
   const {state,answers}=cur, st=state.stage||'factor', ph=state.phase;
   if(ph==='lobby') return '<h2 style="margin-top:20px">Handa na ba kayo?</h2><p class="big">Get ready. Waiting for the teacher to start Round 1.</p><div class="sampa">'+SAMP+'</div>';
   if(ph==='final'||st==='final'){
@@ -462,6 +501,12 @@ function render(){
   if(!cur){ $('#app').innerHTML='<p class="muted">Connecting…</p>'; return; }
   $('#app').innerHTML=head()+view();
   $('#chg').onclick=()=>{TS.removeItem('br_team');team=null;render();};
+  $('#hm').onclick=()=>{home=!home;hmsg='';render();};
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.go, now=actNow();
+    if(i===now||now===4){home=false;render();return;}
+    hmsg=now===0?'Waiting for your teacher to start.':i<now?'That activity is finished. You cannot go back. Your teacher is on '+ACTN[now]+'.':'Not open yet. Your teacher is on '+ACTN[now]+'.'; render();
+  });
   document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{sel.f=b.dataset.f;render();});
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{sel.ot=b.dataset.o;render();});
   const s=$('#send'); if(s) s.onclick=async()=>{ s.disabled=true; const r=await Store.answer('r'+cur.state.round,team,{f:sel.f,ot:sel.ot}); sentMsg=r&&r.ok===false?'Not sent (time is up).':'Sent ✓'; const m=$('#msg'); if(m) m.textContent=sentMsg; s.disabled=false; };
@@ -476,7 +521,7 @@ async function poll(){
   try{
     const d=await Store.get(); const st=d.state, k=(st.stage||'factor')+'|'+st.phase+'|'+st.round+'|'+st.q+'|'+st.v;
     cur=d;
-    if(k!==key){ key=k; sel={f:null,ot:null,v:null}; sentMsg=''; if(!(st.stage==='boss'&&st.phase==='open')) draft=null; render(); }
+    if(k!==key){ key=k; home=false; rev=null; hmsg=''; sel={f:null,ot:null,v:null}; sentMsg=''; if(!(st.stage==='boss'&&st.phase==='open')) draft=null; render(); }
   }catch(e){}
 }
 setInterval(()=>{ const el=$('#tl'); if(el&&cur&&cur.state.phase==='open'){ const l=leftS(); el.textContent=(cur.state.stage==='boss')?tm(l):l+'s'; } },400);
