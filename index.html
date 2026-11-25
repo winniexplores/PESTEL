@@ -338,16 +338,16 @@ function factorView(){
 function bossView(){
   const ph=S.phase; let h='', side='';
   if(ph==='ready'){
-    h+='<div class="card"><h2>Boss Round: Business Radar Report</h2><p class="scen" style="font-size:clamp(15px,2.8vh,28px)">Each team gets a business card. On your tablet: fill the PESTEL grid, mark each factor Opportunity or Threat, write one recommendation, and let the Researcher add one source. You have 4 minutes.</p></div>';
+    h+='<div class="card"><h2>Boss Round: Business Radar Report</h2><p class="scen" style="font-size:clamp(15px,2.8vh,28px)">Each team gets a business card. On your tablet: fill the PESTEL grid, mark each factor Opportunity or Threat and write one recommendation. You have 4 minutes.</p></div>';
     h+='<div class="chips">'+CARDS.slice(0,N).map((c,i)=>'<span class="chip">Team '+(i+1)+' → Card '+c.id+': '+c.biz+'</span>').join('')+'</div>';
     h+='<div class="ctrl"><button class="btn primary" onclick="openAnswers('+SECS_BOSS+')">Start Boss Round (4:00)</button></div>';
   } else if(ph==='open'||ph==='locked'){
-    h+='<div class="card"><p class="eyebrow">Boss Round</p><p class="scen">Fill the PESTEL grid for your card. One recommendation. Researcher: add a source.</p></div>'+timerBlock('boss');
+    h+='<div class="card"><p class="eyebrow">Boss Round</p><p class="scen">Fill the PESTEL grid for your card. Write one recommendation.</p></div>'+timerBlock('boss');
     h+='<div class="ctrl">'+(ph==='open'?'<button class="btn" onclick="lockNow()">Lock now</button>':'<button class="btn primary" onclick="presentBoss()">Present teams</button>')+'</div>';
   } else {
     const t=S.bossView||1, c=CARDS[t-1], a=(A.boss||{})[t]||{rows:{}}, aw=(S.awards.boss||{})[t]||{c:0,e:0,r:0};
     h+='<div class="card"><p class="eyebrow">Team '+t+' · Card '+c.id+' · '+c.biz+'</p>'+FACTORS.map(f=>{const r=(a.rows&&a.rows[f.id])||{};return '<div class="brow">'+tagHTML(f)+'<span class="btxt">'+esc(r.t||'—')+'</span><span class="otp">'+(r.ot?otName(r.ot):'—')+'</span></div>';}).join('')+'</div>';
-    h+='<div class="card"><p class="scen" style="font-size:clamp(14px,2.7vh,26px);margin:0"><b>Recommendation:</b> '+esc(a.rec||'—')+'<br><span class="muted">Source: '+esc(a.src||'—')+'</span></p></div>';
+    h+='<div class="card"><p class="scen" style="font-size:clamp(14px,2.7vh,26px);margin:0"><b>Recommendation:</b> '+esc(a.rec||'—')+'</p></div>';
     h+='<div class="ctrl"><button class="btn" onclick="bossTeam(-1)"'+(t<=1?' disabled':'')+'>◀ Previous team</button>'+(t<N?'<button class="btn primary" onclick="bossTeam(1)">Next team ▶</button>':'<button class="btn primary" onclick="startQuiz(1)">Next: Lightning Round</button>')+'</div>';
     const rows=[['c','Factors classified correctly'],['e','Effect explained (opportunity or threat)'],['r','Realistic recommendation and teamwork']];
     side='<div class="card" style="margin-top:1.2vh"><h3>Rubric: Team '+t+' ('+(aw.c+aw.e+aw.r)+'/30)</h3>'+rows.map(([k,l])=>'<div class="rub"><span>'+l+'</span><span>'+[0,5,10].map(v=>'<button class="btn'+(aw[k]===v?' sel':'')+'" onclick="bossScore('+t+',\''+k+'\','+v+')">'+v+'</button>').join('')+'</span></div>').join('')+'</div>';
@@ -475,7 +475,7 @@ function bossV(state,answers,ph){
     let h='<div class="bhead"><span class="eyebrow">Boss Round · Card '+c.id+' · '+c.biz+'</span><b id="tl" class="timer2">'+tm(leftS())+'</b></div>';
     h+='<div class="card bfacts">'+c.facts.join(' · ')+'</div><div class="bform">';
     h+=FACTORS.map(f=>{const r=draft.rows[f.id];return '<div class="brow"><span class="tag" style="background:'+f.color+';border-color:'+f.line+';color:'+f.text+'">'+f.letter+'</span><input class="inp" data-r="'+f.id+'" maxlength="60" placeholder="'+f.name+': what is happening?" value="'+esc(r.t)+'"><button class="ob'+(r.ot==='O'?' sel':'')+'" data-bo="'+f.id+':O">O</button><button class="ob'+(r.ot==='T'?' sel':'')+'" data-bo="'+f.id+':T">T</button></div>';}).join('');
-    h+='<input class="inp" id="rec" maxlength="160" placeholder="Recommendation to the owner" value="'+esc(draft.rec)+'"><input class="inp" id="src" maxlength="60" placeholder="Researcher: source (news site)" value="'+esc(draft.src)+'"></div>';
+    h+='<input class="inp" id="rec" maxlength="160" placeholder="Recommendation to the owner" value="'+esc(draft.rec)+'"></div>';
     h+='<button class="btn primary" id="bsend" style="width:100%">Send report</button><p class="ok" id="msg" style="margin:4px 0 0">'+(mine?'Sent. You may change it before time is up.':sentMsg)+'</p>';
     return h;
   }
@@ -514,7 +514,6 @@ function render(){
   document.querySelectorAll('[data-r]').forEach(i=>i.oninput=()=>{draft.rows[i.dataset.r].t=i.value;});
   document.querySelectorAll('[data-bo]').forEach(b=>b.onclick=()=>{const [f,o]=b.dataset.bo.split(':');draft.rows[f].ot=o;document.querySelectorAll('[data-bo^="'+f+':"]').forEach(x=>x.classList.toggle('sel',x===b));});
   const rec=$('#rec'); if(rec) rec.oninput=()=>{draft.rec=rec.value;};
-  const src=$('#src'); if(src) src.oninput=()=>{draft.src=src.value;};
   const bs=$('#bsend'); if(bs) bs.onclick=async()=>{ bs.disabled=true; const r=await Store.answer('boss',team,{rows:draft.rows,rec:draft.rec,src:draft.src}); sentMsg=r&&r.ok===false?'Not sent (time is up).':'Sent ✓'; const m=$('#msg'); if(m) m.textContent=sentMsg; bs.disabled=false; };
 }
 async function poll(){
